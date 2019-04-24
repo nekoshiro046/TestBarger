@@ -7,12 +7,17 @@ let objNum = 10;
  
 function preload() {
 	imges[0] = loadImage('assets/watermark.png');
+
 	imges[1] = loadImage('assets/lettuce.png');
 	imges[2] = loadImage('assets/tomato.png');
 	imges[3] = loadImage('assets/patty.png');
-	imges[4] = loadImage('assets/lettuce2.png');
-	imges[5] = loadImage('assets/tomato2.png');
-	imges[6] = loadImage('assets/patty2.png');
+	imges[4] = loadImage('assets/buns.png');
+
+	imges[5] = loadImage('assets/lettuce2.png');
+	imges[6] = loadImage('assets/tomato2.png');
+	imges[7] = loadImage('assets/patty2.png');
+	imges[8] = loadImage('assets/buns2.png');
+
 }
 
 function setup() {
@@ -49,15 +54,27 @@ function updata(){
 
 	for (var i = 0; i < objNum; i++) {
 		if(objects[i].position.x < wt.position.x && objects[i].position.x > (wt.position.x - wt.objSize)  
-			&& objects[i].position.y > wt.position.y )
+			&& objects[i].position.y < wt.position.y -wt.paHeight && objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
 		{
 			objects[i].rest();
+
 			if(objects[i].imgID == 1){
-				wt.lettuceOn = true;
+				wt.patties[wt.paCount] = 5;
+				wt.paCount++;
+				wt.paHeight += wt.objSize/4;
+
 			}else if(objects[i].imgID == 2){
-				wt.tomatoOn = true;
+				wt.patties[wt.paCount] = 6;
+				wt.paCount++;
+				wt.paHeight += wt.objSize/4;
+			}else if(objects[i].imgID == 3){
+				wt.patties[wt.paCount] = 7;
+				wt.paCount++;
+				wt.paHeight += wt.objSize/4;
 			}else{
-				wt.pattyOn = true;
+				wt.patties[wt.paCount] = 8;
+				wt.paCount++;
+				wt.paHeight += wt.objSize/4;
 			}
 		}
 		else{
@@ -86,9 +103,8 @@ class object{
 	    this.velocity = createVector(0, 0);
 	    this.acceleration = createVector(0, 0);
 	    this.gravity = createVector(0, random(0.05, 0.1));
-	    this.imgID = int(random(1,4));
+	    this.imgID = int(random(1,5));
 	    this.objSize = 50;
-
 	}
 
 	updata(){
@@ -97,15 +113,9 @@ class object{
 	    this.position.add(this.velocity);
 	    this.acceleration.mult(0);
 	    this.velocity.mult(0.98);
-
-	    this.lettuceOn = false;
-	    this.tomatoOn = false;
-	    this.pattyOn = false;
-	    
 	    
 	    if(this.position.y > windowHeight){
 	      var posX = random(windowWidth);
-	      	// var posX = random(windowWidth/2,windowWidth);
 	      this.position = createVector(posX, 0);
 	    }
 	}
@@ -113,8 +123,6 @@ class object{
 	rest(){
 		var posX = random(windowWidth);
 		var posY = int(random(-windowHeight/2));
-		// var posX = windowWidth/2;
-	    // var posX = random(windowWidth/2,windowWidth);
 	    this.position = createVector(posX, posY);
 
 	}
@@ -135,6 +143,10 @@ class waiter{
 	    this.velocity = createVector(0, 0);
 	    this.imgID = 0;
 	    this.objSize = 100;
+	    this.stackingHeight = 0;
+	    this.patties = [];
+	    this.paCount = 0;
+	    this.paHeight = 0;
 
 	}
 
@@ -144,23 +156,14 @@ class waiter{
 
 	drawImg(){
 		image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
-		if(this.lettuceOn)this.drawLettuce();
-		if(this.tomatoOn)this.drawTomato();
-		if(this.pattyOn)this.drawPatty();
+		for(var i = 0,j=0; i < this.paCount; i++){
+			if(this.patties[i] != 0){
+				image(imges[this.patties[i]], this.position.x-this.objSize/2, this.position.y-j,this.objSize/2,this.objSize/4);
+				j += this.objSize/4;
+			}
+		}
+		
 	}
-
-	drawTomato(){
-		image(imges[5], this.position.x-this.objSize/2, this.position.y-this.objSize/4,this.objSize/2,this.objSize/4);
-	}
-
-	drawLettuce(){
-		image(imges[4], this.position.x-this.objSize/2, this.position.y-this.objSize/2,this.objSize/2,this.objSize/4);
-	}
-
-	drawPatty(){
-		image(imges[6], this.position.x-this.objSize/2, this.position.y-this.objSize/4*3,this.objSize/2,this.objSize/4);
-	}
-
 
 }
 
