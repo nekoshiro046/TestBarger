@@ -5,7 +5,7 @@ var wt;
 var fr;
 let objNum = 10;
 
-var sw;
+var sw;var btn;
 
 var scene;
 
@@ -33,8 +33,9 @@ function setup() {
   frameRate(fr);
 
   sw = new stopWatch(fr,windowWidth/10,windowWidth/2,windowWidth/10);
+  btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,50);
 
-  wt = new waiter(width/2,height - 100);
+  wt = new waiter(width/2,windowHeight/5*4);
   initObjets();
 
 }
@@ -50,12 +51,16 @@ function draw() {
 function drawGameScene(){
 	background(255);
 
-	sw.updata();
-  	sw.drawWatch();
-
 	updata();
 	drawMaterial();
 	wt.drawImg();
+
+
+	//------------------menues------------
+	sw.updata();
+  	sw.drawWatch();
+  	btn.updata();
+  	btn.drawBtn();
 }
 
 function drawEndScene(){
@@ -69,14 +74,15 @@ function windowResized() {
 }
 
 function updata(){
-	if(mouseIsPressed){
-		if(mouseX < width/2){
-			wt.updata(-10);
-		}
-		else if(mouseX > width/2){
-			wt.updata(10);
-		}
-	}
+	// if(mouseIsPressed){
+	// 	if(mouseX < width/2){
+	// 		wt.updata(-10);
+	// 	}
+	// 	else if(mouseX > width/2){
+	// 		wt.updata(10);
+	// 	}
+	// }
+	wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {
 		if(objects[i].position.x < wt.position.x && objects[i].position.x > (wt.position.x - wt.objSize)  

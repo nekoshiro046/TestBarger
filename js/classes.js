@@ -5,7 +5,7 @@ class object{
 	    this.acceleration = createVector(0, 0);
 	    this.gravity = createVector(0,0.1);
 	    this.imgID = int(random(1,5));
-	    this.objSize = windowWidth/10;
+	    this.objSize = windowHeight/10;
 	}
 
 	updata(){
@@ -43,7 +43,7 @@ class waiter{
 		this.position = createVector(x, y);
 	    this.velocity = createVector(0, 0);
 	    this.imgID = 0;
-	    this.objSize = windowWidth/6;
+	    this.objSize = windowHeight/6;
 	    this.position.y -= this.objSize;
 	    this.stackingHeight = 0;
 	    this.patties = [];
@@ -68,6 +68,8 @@ class waiter{
 	}
 
 }
+
+//--------------------------------------------------------------------
 
 class stopWatch{
   constructor(fr,cs,posx,posy){
@@ -106,3 +108,66 @@ class stopWatch{
     pop();
   }
 }
+
+
+class moveBtn{
+
+  constructor(x1,y1,x2,y2,s){
+    this.leftPosition = createVector(x1, y1);
+    this.rightPosition = createVector(x2, y2);
+    this.btnSize = s;
+    this.leftBtnIsPressed = false;
+    this.rightBtnIsPressed = false;
+  }
+
+  updata(){
+    if(mouseIsPressed && dist(mouseX,mouseY,this.leftPosition.x,this.leftPosition.y) < this.btnSize*4/3 ){
+      this.leftBtnIsPressed = true;
+      return -10;
+    }else if(mouseIsPressed && dist(mouseX,mouseY,this.rightPosition.x,this.rightPosition.y) < this.btnSize*4/3 ){
+      this.rightBtnIsPressed = true;
+      return 10;
+    }else{
+    	return 0;
+    }
+  }
+
+  drawBtn(){
+    //leftBtn
+    push();
+    translate(this.leftPosition.x,this.leftPosition.y);
+    rotate(- PI /2.0);
+    // triangle(posx,posy-size/3*2,posx - size/sqrt(3),posy+size/3,posx+size/sqrt(3),posy+size/3);
+    ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
+    if(this.leftBtnIsPressed){
+      // push();
+      fill(255,0,0);
+      this.leftBtnIsPressed = false;
+      // pop();
+    }else{
+      noFill();
+    }
+    triangle(0,-this.btnSize/3*2,- this.btnSize/sqrt(3),this.btnSize/3,this.btnSize/sqrt(3),this.btnSize/3);
+    pop();
+
+    //rightBtn
+    push();
+    translate(this.rightPosition.x, this.rightPosition.y);
+    rotate(PI /2.0);
+    // triangle(posx,posy-size/3*2,posx - size/sqrt(3),posy+size/3,posx+size/sqrt(3),posy+size/3);
+    ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
+    if(this.rightBtnIsPressed){
+      // push();
+      fill(255,0,0);
+      this.rightBtnIsPressed = false;
+      // pop();
+    }else{
+      noFill();
+    }
+    triangle(0,-this.btnSize/3*2,- this.btnSize/sqrt(3),this.btnSize/3,this.btnSize/sqrt(3),this.btnSize/3);
+    pop();
+  }
+}
+
+
+
