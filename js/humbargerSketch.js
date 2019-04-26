@@ -1,13 +1,14 @@
 var imges = [];
 var objects = [];
-var wt;
+let objNum = 5;//obj_classの生成数
+var wt;//waiter_class
 
-var fr;
-let objNum = 10;
+var fr;//フレームレート
 
+//munu_classes
 var sw;var btn;
-
-var scene;
+//シーン管理
+var scene;// 0: start画面 1:game画面 2:end画面ß
 
  
 function preload() {
@@ -27,14 +28,13 @@ function preload() {
 
 function setup() {
 	fr = 10;
-	scene = 1;// 0: start画面 1:game画面 2:end画面 
+	scene = 1;
   //slow down the frameRate to make it more visible
   createCanvas(windowWidth, windowHeight,P2D);
   frameRate(fr);
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/2,windowWidth/10);
   btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
-
   wt = new waiter(width/2,windowHeight/5*4);
   initObjets();
 
@@ -48,6 +48,10 @@ function draw() {
 	}
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function drawGameScene(){
 	background(255);
 
@@ -57,39 +61,23 @@ function drawGameScene(){
 
 
 	//------------------menues------------
-	sw.updata();
-  	sw.drawWatch();
-  	btn.updata();
-  	btn.drawBtn();
+	drawMenus();
 }
 
 function drawEndScene(){
-	background(0);
+	drawMaterial();
+	wt.drawImg();
+	drawMenus();
 }
 
-
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
 
 function updata(){
-	// if(mouseIsPressed){
-	// 	if(mouseX < width/2){
-	// 		wt.updata(-10);
-	// 	}
-	// 	else if(mouseX > width/2){
-	// 		wt.updata(10);
-	// 	}
-	// }
 	wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {
 		if(objects[i].position.x < wt.position.x && objects[i].position.x > (wt.position.x - wt.objSize)  
 			&& objects[i].position.y < wt.position.y -wt.paHeight && objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
 		{
-			objects[i].rest();
-
 			if(objects[i].imgID == 1){
 				wt.patties[wt.paCount] = 5;
 				wt.paCount++;
@@ -108,6 +96,7 @@ function updata(){
 				wt.paCount++;
 				wt.paHeight += wt.objSize/4;
 			}
+			objects[i].rest();
 		}
 		else{
 			objects[i].updata();
@@ -121,11 +110,26 @@ function drawMaterial(){
 	}
 }
 
+function drawMenus(){
+	push();
+	fill(74,204,153);
+	noStroke();
+	rect(0,0,windowWidth,sw.posY+sw.circleSize);
+	fill(189,210,204);
+	noStroke();
+	rect(0,wt.position.y+wt.objSize,windowWidth,windowHeight);
+	pop();
+	sw.updata();
+  	sw.drawWatch();
+  	btn.updata();
+  	btn.drawBtn();
+}
+
 function initObjets(){
 	for (var i = 0; i < objNum; i++) {
 	  var posX = int(random(windowWidth));
-	  var posY = int(random(-windowHeight/2));
-	  objects[i] = new object(posX,posY);
+	  var posY = int(random(sw.posY));
+	  objects[i] = new object(posX,posY,sw.posY+sw.circleSizem,wt.position.y+wt.objSize);
 	}
 }
 

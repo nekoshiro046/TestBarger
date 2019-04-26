@@ -1,11 +1,13 @@
 class object{
-	constructor(x,y){
+	constructor(x,y,at,ab){
 		this.position = createVector(x, y);
 	    this.velocity = createVector(0, 0);
 	    this.acceleration = createVector(0, 0);
 	    this.gravity = createVector(0,0.1);
 	    this.imgID = int(random(1,5));
 	    this.objSize = windowHeight/10;
+      this.areaTop = at;
+      this.areaBottom = ab;
 	}
 
 	updata(){
@@ -15,16 +17,18 @@ class object{
 	    this.acceleration.mult(0);
 	    this.velocity.mult(0.98);
 	    
-	    if(this.position.y > windowHeight){
+	    if(this.position.y > this.areaBottom){
 	      var posX = random(windowWidth);
+        var posY = int(random(-windowHeight/2,this.at));
 	      this.position = createVector(posX, 0);
 	    }
 	}
 
 	rest(){
 		var posX = random(windowWidth);
-		var posY = int(random(-windowHeight/2));
-	    this.position = createVector(posX, posY);
+		var posY = int(random(-windowHeight/2,this.at));
+	  this.position = createVector(posX, posY);
+    this.imgID = int(random(1,5));
 
 	}
 
@@ -40,10 +44,11 @@ class object{
 
 class waiter{
 	constructor(x,y){
+
 		this.position = createVector(x, y);
-	    this.velocity = createVector(0, 0);
-	    this.imgID = 0;
-	    this.objSize = windowHeight/6;
+	  this.velocity = createVector(0, 0);
+	  this.imgID = 0;
+	  this.objSize = windowHeight/6;
 	    this.position.y -= this.objSize;
 	    this.stackingHeight = 0;
 	    this.patties = [];
@@ -141,7 +146,7 @@ class moveBtn{
     ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
     if(this.leftBtnIsPressed){
       // push();
-      fill(255,0,0);
+      fill(202,34,125);
       this.leftBtnIsPressed = false;
       // pop();
     }else{
@@ -158,7 +163,7 @@ class moveBtn{
     ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
     if(this.rightBtnIsPressed){
       // push();
-      fill(255,0,0);
+      fill(202,34,125);
       this.rightBtnIsPressed = false;
       // pop();
     }else{
