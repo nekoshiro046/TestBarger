@@ -2,7 +2,12 @@ var imges = [];
 var objects = [];
 var wt;
 
+var fr;
 let objNum = 10;
+
+var sw;
+
+var scene;
 
  
 function preload() {
@@ -21,9 +26,13 @@ function preload() {
 }
 
 function setup() {
+	fr = 10;
+	scene = 1;// 0: start画面 1:game画面 2:end画面 
   //slow down the frameRate to make it more visible
   createCanvas(windowWidth, windowHeight,P2D);
-  frameRate(10);
+  frameRate(fr);
+
+  sw = new stopWatch(fr,windowWidth/10,windowWidth/2,windowWidth/10);
 
   wt = new waiter(width/2,height - 100);
   initObjets();
@@ -31,12 +40,29 @@ function setup() {
 }
 
 function draw() {
+	if(scene == 1){
+		drawGameScene();
+	}else{
+		drawEndScene();
+	}
+}
+
+function drawGameScene(){
 	background(255);
+
+	sw.updata();
+  	sw.drawWatch();
 
 	updata();
 	drawMaterial();
 	wt.drawImg();
 }
+
+function drawEndScene(){
+	background(0);
+}
+
+
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -95,76 +121,6 @@ function initObjets(){
 	  var posY = int(random(-windowHeight/2));
 	  objects[i] = new object(posX,posY);
 	}
-}
-
-class object{
-	constructor(x,y){
-		this.position = createVector(x, y);
-	    this.velocity = createVector(0, 0);
-	    this.acceleration = createVector(0, 0);
-	    this.gravity = createVector(0, random(0.05, 0.1));
-	    this.imgID = int(random(1,5));
-	    this.objSize = 50;
-	}
-
-	updata(){
-		this.acceleration.add(this.gravity);
-	    this.velocity.add(this.acceleration);
-	    this.position.add(this.velocity);
-	    this.acceleration.mult(0);
-	    this.velocity.mult(0.98);
-	    
-	    if(this.position.y > windowHeight){
-	      var posX = random(windowWidth);
-	      this.position = createVector(posX, 0);
-	    }
-	}
-
-	rest(){
-		var posX = random(windowWidth);
-		var posY = int(random(-windowHeight/2));
-	    this.position = createVector(posX, posY);
-
-	}
-
-	putOnBred(bredPos){
-		this.position = bredPos;
-	}
-
-	drawImg(){
-		image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y-this.objSize/2,this.objSize,this.objSize);
-	}
-
-}
-
-class waiter{
-	constructor(x,y){
-		this.position = createVector(x, y);
-	    this.velocity = createVector(0, 0);
-	    this.imgID = 0;
-	    this.objSize = 100;
-	    this.stackingHeight = 0;
-	    this.patties = [];
-	    this.paCount = 0;
-	    this.paHeight = 0;
-
-	}
-
-	updata(d){
-		this.position.x += d;
-	}
-
-	drawImg(){
-		image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
-		for(var i = 0,j=0; i < this.paCount; i++){
-			if(this.patties[i] != 0){
-				image(imges[this.patties[i]], this.position.x-this.objSize/2, this.position.y-j,this.objSize/2,this.objSize/4);
-				j += this.objSize/4;
-			}
-		}
-		
-	}
-
 }
 
 
