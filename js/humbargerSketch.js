@@ -32,8 +32,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight,P2D);
   frameRate(fr);
 
-  sw = new stopWatch(fr,windowWidth/10,windowWidth/2,windowWidth/10);
-  btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,50);
+  sw = new stopWatch(fr,windowHeight/10,windowWidth/2,windowWidth/10);
+  btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
 
   wt = new waiter(width/2,windowHeight/5*4);
   initObjets();
