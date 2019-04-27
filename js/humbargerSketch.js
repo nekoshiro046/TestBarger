@@ -9,21 +9,37 @@ var fr;//フレームレート
 var sw;var btn;
 //シーン管理
 var scene;// 0: start画面 1:game画面 2:end画面ß
+var comentCount = 0;
 
  
 function preload() {
+	// imges[0] = loadImage('assets/watermark.png');
+
+	// imges[1] = loadImage('assets/lettuce.png');
+	// imges[2] = loadImage('assets/tomato.png');
+	// imges[3] = loadImage('assets/patty.png');
+	// imges[4] = loadImage('assets/buns.png');
+
+	// imges[5] = loadImage('assets/lettuce2.png');
+	// imges[6] = loadImage('assets/tomato2.png');
+	// imges[7] = loadImage('assets/patty2.png');
+	// imges[8] = loadImage('assets/buns2.png');
+
+	// imges[9] = loadImage('assets/wow.png');
+
 	imges[0] = loadImage('assets/watermark.png');
 
-	imges[1] = loadImage('assets/lettuce.png');
-	imges[2] = loadImage('assets/tomato.png');
-	imges[3] = loadImage('assets/patty.png');
-	imges[4] = loadImage('assets/buns.png');
+	imges[1] = loadImage('assets/lettuce.jp2');
+	imges[2] = loadImage('assets/tomato.jp2');
+	imges[3] = loadImage('assets/patty.jp2');
+	imges[4] = loadImage('assets/buns.jp2');
 
-	imges[5] = loadImage('assets/lettuce2.png');
+	imges[5] = loadImage('assets/lettuce2.jp2');
 	imges[6] = loadImage('assets/tomato2.png');
-	imges[7] = loadImage('assets/patty2.png');
-	imges[8] = loadImage('assets/buns2.png');
+	imges[7] = loadImage('assets/patty2.jp2');
+	imges[8] = loadImage('assets/buns2.jp2');
 
+	imges[9] = loadImage('assets/wow.jp2');
 }
 
 function setup() {
@@ -75,23 +91,27 @@ function updata(){
 	wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {
-		if(objects[i].position.x < wt.position.x && objects[i].position.x > (wt.position.x - wt.objSize)  
-			&& objects[i].position.y < wt.position.y -wt.paHeight && objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
+		if(objects[i].position.x < wt.position.x 
+			&& objects[i].position.x > (wt.position.x - wt.objSize)  
+			&& objects[i].position.y < wt.position.y -wt.paHeight 
+			&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
 		{
 			if(objects[i].imgID == 1){
 				wt.patties[wt.paCount] = 5;
 				wt.paCount++;
 				wt.paHeight += wt.objSize/4;
-
-			}else if(objects[i].imgID == 2){
+			}
+			else if(objects[i].imgID == 2){
 				wt.patties[wt.paCount] = 6;
 				wt.paCount++;
 				wt.paHeight += wt.objSize/4;
-			}else if(objects[i].imgID == 3){
+			}
+			else if(objects[i].imgID == 3){
 				wt.patties[wt.paCount] = 7;
 				wt.paCount++;
 				wt.paHeight += wt.objSize/4;
-			}else{
+			}
+			else{
 				wt.patties[wt.paCount] = 8;
 				wt.paCount++;
 				wt.paHeight += wt.objSize/4;
@@ -123,6 +143,12 @@ function drawMenus(){
   	sw.drawWatch();
   	btn.updata();
   	btn.drawBtn();
+
+
+  	if(wt.paCount == 1){
+		drawWow(windowWidth/2,windowHeight/2,20,10);
+
+	}
 }
 
 function initObjets(){
@@ -131,6 +157,33 @@ function initObjets(){
 	  var posY = int(random(sw.posY));
 	  objects[i] = new object(posX,posY,sw.posY+sw.circleSizem,wt.position.y+wt.objSize);
 	}
+}
+
+function drawWow(ox,oy,r,vertexNum) {
+  // vertexNum -= 1;
+  // push();
+  // noFill();
+  // stroke(1);
+  // strokeWeight(5);
+  // translate(ox, oy);
+  // beginShape();
+  // for (var theta = 0; theta < 360; theta++) {
+  //   var x = r * (vertexNum * cos(radians(theta)) + cos(radians(-vertexNum * theta)));
+  //   var y = r * (vertexNum * sin(radians(theta)) + sin(radians(-vertexNum * theta)));
+
+  //   vertex(x, y);
+  // }
+  // endShape();
+  // pop();
+  if(comentCount < 20){
+  	push();
+  	translate(windowWidth/2,windowHeight/2);
+  	tint(255,20);
+  	image(imges[9], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+  	pop();
+  	comentCount++;
+  }
+  
 }
 
 
