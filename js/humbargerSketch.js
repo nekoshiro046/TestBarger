@@ -145,7 +145,7 @@ function drawMenus(){
   	btn.drawBtn();
 
 
-  	if(wt.paCount == 1){
+  	if(wt.paCount > 9){
 		drawWow(windowWidth/2,windowHeight/2,20,10);
 
 	}
