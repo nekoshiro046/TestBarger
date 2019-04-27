@@ -8,8 +8,9 @@ var fr;//フレームレート
 //munu_classes
 var sw;var btn;
 //シーン管理
-var scene;// 0: start画面 1:game画面 2:end画面
+var scene;// 0: start画面 1:game画面 2:end画面 3:スコア画面
 var commentCount = 0;
+var uScore = 0;
 
  
 function preload() {
@@ -66,14 +67,13 @@ function draw() {
 	}else if(scene == 2){
 		drawEndScene();
 	}else if(scene == 3){
-		// drawScoreScene();
-		setup();
+		drawScoreScene();
 	}
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+// }
 
 function drawGameScene(){
 	background(255);
@@ -104,14 +104,15 @@ function drawScoreScene(){
 	wt.drawImg();
 	drawMenus();
 
-	drawComment(windowWidth/2,windowHeight/2,20,10,'score');
+	// drawComment(windowWidth/2,windowHeight/2,20,10,'score');
+
 }
 
 
 function updata(){
 	wt.updata(btn.updata());
 
-	for (var i = 0; i < objNum; i++) {
+	for (var i = 0; i < objNum; i++) {//落ちてくる具材(オブジェクト)それぞれに対し当たり判定を行う
 		if(objects[i].position.x < wt.position.x 
 			&& objects[i].position.x > (wt.position.x - wt.objSize)  
 			&& objects[i].position.y < wt.position.y -wt.paHeight 
@@ -204,6 +205,7 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 	  	commentCount++;
   	}else{
   		scene = 3;
+  		uScore = wt.paCount;
   	}
   }
 
