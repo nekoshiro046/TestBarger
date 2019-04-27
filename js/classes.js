@@ -97,6 +97,7 @@ class stopWatch{
     }
     if(this.second > 360){
       scene = 2;
+      commentCount =0;
     }
   }
 

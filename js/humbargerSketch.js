@@ -8,8 +8,8 @@ var fr;//フレームレート
 //munu_classes
 var sw;var btn;
 //シーン管理
-var scene;// 0: start画面 1:game画面 2:end画面ß
-var comentCount = 0;
+var scene;// 0: start画面 1:game画面 2:end画面
+var commentCount = 0;
 
  
 function preload() {
@@ -40,6 +40,10 @@ function preload() {
 	imges[8] = loadImage('assets/buns2.jp2');
 
 	imges[9] = loadImage('assets/wow.jp2');
+	imges[10] = loadImage('assets/timeup.jp2');
+
+	imges[11] = loadImage('assets/score.jp2');
+	
 }
 
 function setup() {
@@ -59,8 +63,11 @@ function setup() {
 function draw() {
 	if(scene == 1){
 		drawGameScene();
-	}else{
+	}else if(scene == 2){
 		drawEndScene();
+	}else if(scene == 3){
+		// drawScoreScene();
+		setup();
 	}
 }
 
@@ -81,9 +88,23 @@ function drawGameScene(){
 }
 
 function drawEndScene(){
+	background(255);
+
 	drawMaterial();
 	wt.drawImg();
 	drawMenus();
+
+	drawComment(windowWidth/2,windowHeight/2,20,10,'timeup');
+}
+
+function drawScoreScene(){
+	background(255);
+
+	drawMaterial();
+	wt.drawImg();
+	drawMenus();
+
+	drawComment(windowWidth/2,windowHeight/2,20,10,'score');
 }
 
 
@@ -139,14 +160,14 @@ function drawMenus(){
 	noStroke();
 	rect(0,wt.position.y+wt.objSize,windowWidth,windowHeight);
 	pop();
-	sw.updata();
+	if(scene == 1)sw.updata();
   	sw.drawWatch();
   	btn.updata();
   	btn.drawBtn();
 
 
-  	if(wt.paCount > 9){
-		drawWow(windowWidth/2,windowHeight/2,20,10);
+  	if(wt.paCount > 4){
+		drawComment(windowWidth/2,windowHeight/2,20,10,'wow');
 
 	}
 }
@@ -159,29 +180,38 @@ function initObjets(){
 	}
 }
 
-function drawWow(ox,oy,r,vertexNum) {
-  // vertexNum -= 1;
-  // push();
-  // noFill();
-  // stroke(1);
-  // strokeWeight(5);
-  // translate(ox, oy);
-  // beginShape();
-  // for (var theta = 0; theta < 360; theta++) {
-  //   var x = r * (vertexNum * cos(radians(theta)) + cos(radians(-vertexNum * theta)));
-  //   var y = r * (vertexNum * sin(radians(theta)) + sin(radians(-vertexNum * theta)));
+function drawComment(ox,oy,r,vertexNum,imgNa) {
+  if(imgNa == 'wow'){
+  	if(commentCount < 20){
+	  	push();
+	  	translate(windowWidth/2,windowHeight/2);
+	  	tint(255,20);
+	  	image(imges[9], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	  	pop();
+	  	commentCount++;
+  	}
+  	// else{
+  	// 	comentCount=0;
+  	// }
+  }
+  else if(imgNa == 'timeup'){
+  	if(commentCount < 30){
+	  	push();
+	  	translate(windowWidth/2,windowHeight/2);
+	  	tint(255,200);
+	  	image(imges[10], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	  	pop();
+	  	commentCount++;
+  	}else{
+  		scene = 3;
+  	}
+  }
 
-  //   vertex(x, y);
-  // }
-  // endShape();
-  // pop();
-  if(comentCount < 20){
+  else if(imgNa == 'score'){
   	push();
   	translate(windowWidth/2,windowHeight/2);
-  	tint(255,20);
-  	image(imges[9], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
-  	pop();
-  	comentCount++;
+	image(imges[11], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	pop();
   }
   
 }
