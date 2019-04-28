@@ -58,7 +58,9 @@ class waiter{
 	}
 
 	updata(d){
-		this.position.x += d;
+    if((this.position.x+d < windowWidth-this.objSize/2) && (this.position.x+d > 0) ) {
+      this.position.x += d;
+    }
 	}
 
 	drawImg(){
@@ -104,12 +106,15 @@ class stopWatch{
   drawWatch(){
     push();
     translate(this.posX,this.posY);
+    strokeWeight(0.5);
     ellipse(0,0,this.circleSize,this.circleSize);
+    strokeWeight(5);
     pop();
 
     push();
     translate(this.posX,this.posY);
     rotate(radians(this.second));
+    fill(0);
     rect(0,0,4,this.needleSize);
     pop();
   }
@@ -143,6 +148,7 @@ class moveBtn{
     push();
     translate(this.leftPosition.x,this.leftPosition.y);
     rotate(- PI /2.0);
+    noStroke();
     // triangle(posx,posy-size/3*2,posx - size/sqrt(3),posy+size/3,posx+size/sqrt(3),posy+size/3);
     ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
     if(this.leftBtnIsPressed){
@@ -153,6 +159,8 @@ class moveBtn{
     }else{
       noFill();
     }
+    strokeWeight(0.5);
+    stroke(0);
     triangle(0,-this.btnSize/3*2,- this.btnSize/sqrt(3),this.btnSize/3,this.btnSize/sqrt(3),this.btnSize/3);
     pop();
 
@@ -160,6 +168,7 @@ class moveBtn{
     push();
     translate(this.rightPosition.x, this.rightPosition.y);
     rotate(PI /2.0);
+    noStroke();
     // triangle(posx,posy-size/3*2,posx - size/sqrt(3),posy+size/3,posx+size/sqrt(3),posy+size/3);
     ellipse(0,0,this.btnSize*4/3,this.btnSize*4/3);
     if(this.rightBtnIsPressed){
@@ -170,6 +179,8 @@ class moveBtn{
     }else{
       noFill();
     }
+    strokeWeight(0.5);
+    stroke(0);
     triangle(0,-this.btnSize/3*2,- this.btnSize/sqrt(3),this.btnSize/3,this.btnSize/sqrt(3),this.btnSize/3);
     pop();
   }

@@ -56,7 +56,7 @@ function setup() {
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/2,windowWidth/10);
   btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
-  wt = new waiter(width/2,windowHeight/5*4);
+  wt = new waiter(windowWidth/2,windowHeight/5*4);
   initObjets();
 
 }
@@ -104,7 +104,7 @@ function drawScoreScene(){
 	wt.drawImg();
 	drawMenus();
 
-	// drawComment(windowWidth/2,windowHeight/2,20,10,'score');
+	drawComment(windowWidth/2,windowHeight/2,20,10,'score');
 
 }
 
@@ -175,7 +175,7 @@ function drawMenus(){
 
 function initObjets(){
 	for (var i = 0; i < objNum; i++) {
-	  var posX = int(random(windowWidth));
+	  var posX = int(random(wt.objSize,windowWidth-wt.objSize));
 	  var posY = int(random(sw.posY));
 	  objects[i] = new object(posX,posY,sw.posY+sw.circleSizem,wt.position.y+wt.objSize);
 	}
@@ -206,14 +206,42 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
   	}else{
   		scene = 3;
   		uScore = wt.paCount;
+  		commentCount = 0;
   	}
   }
 
   else if(imgNa == 'score'){
-  	push();
-  	translate(windowWidth/2,windowHeight/2);
-	image(imges[11], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
-	pop();
+  	if(commentCount > 10){
+  // 		push();
+	 //  	translate(windowWidth/2,windowHeight/2);
+		// image(imges[11], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+		// pop();
+		push();
+		translate(windowWidth/2,windowHeight/2);
+		rectMode(CENTER);
+		fill(255,50);
+		noStroke();
+		rect(0,0,windowWidth/2,windowHeight/2);
+		stSize = 32;
+		textSize(stSize);
+		let s1 = 'スコア';
+		let s2 = String(wt.paCount) + 'cm';
+		let s3 = 'もう一度遊ぶ';
+
+		fill(0);
+		text(s1, -stSize, 0);
+		text(s2, 0, stSize);
+		text(s3, -stSize, stSize*2);
+
+		pop();
+
+  	}else{
+  		commentCount++;
+  	}
+ //  	push();
+ //  	translate(windowWidth/2,windowHeight/2);
+	// image(imges[11], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	// pop();
   }
   
 }
