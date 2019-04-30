@@ -230,7 +230,16 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 		fill(0);
 		text(s1, -stSize, 0);
 		text(s2, 0, stSize);
-		text(s3, -stSize, stSize*2);
+		if((mouseX - windowWidth/2 > -stSize) 
+			&& (mouseX - windowWidth/2 < stSize*6) 
+			&& (mouseY - windowHeight/2 > stSize )
+			&& ( mouseY - windowHeight/2 <= stSize*2)){
+			fill(255,0,0);
+			text(s3, -stSize, stSize*2);
+			if(mouseIsPressed)setup();
+		}else{
+			text(s3, -stSize, stSize*2);
+		}
 
 		pop();
 

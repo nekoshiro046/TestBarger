@@ -26,7 +26,7 @@ class object{
 
 	rest(){
 		var posX = random(windowWidth);
-		var posY = int(random(-windowHeight/2,this.at));
+		var posY = int(random(this.at));
 	  this.position = createVector(posX, posY);
     this.imgID = int(random(1,5));
 
