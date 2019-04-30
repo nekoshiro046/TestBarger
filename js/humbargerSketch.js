@@ -85,6 +85,11 @@ function drawGameScene(){
 
 	//------------------menues------------
 	drawMenus();
+
+	if(wt.paCount > 4){
+		drawComment(windowWidth/2,windowHeight/2,20,10,'wow');
+
+	}
 }
 
 function drawEndScene(){
@@ -165,12 +170,6 @@ function drawMenus(){
   	sw.drawWatch();
   	btn.updata();
   	btn.drawBtn();
-
-
-  	if(wt.paCount > 4){
-		drawComment(windowWidth/2,windowHeight/2,20,10,'wow');
-
-	}
 }
 
 function initObjets(){
@@ -219,7 +218,7 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 		push();
 		translate(windowWidth/2,windowHeight/2);
 		rectMode(CENTER);
-		fill(255,50);
+		fill(255,100);
 		noStroke();
 		rect(0,0,windowWidth/2,windowHeight/2);
 		stSize = 32;
