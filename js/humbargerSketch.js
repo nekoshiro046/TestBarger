@@ -170,6 +170,8 @@ function drawMenus(){
   	sw.drawWatch();
   	btn.updata();
   	btn.drawBtn();
+
+  	drawScore();
 }
 
 function initObjets(){
@@ -252,6 +254,33 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 	// pop();
   }
   
+}
+
+function drawScore(){
+	push();
+	rectMode(CENTER);
+
+  	translate(sw.posX/2,sw.posY);
+  	fill(255);
+  	noStroke();
+  	rect(0,0,sw.circleSize*2,sw.circleSize,20);
+
+  	stSize = 32;
+	textSize(stSize);
+	let s1 = 'スコア';
+	let s2 = String(wt.paCount) + 'cm';
+
+	textAlign(CENTER);
+	textSize(stSize);
+	fill(255);
+	text(s1,0,-sw.circleSize/2);
+	fill(0);
+	stSize = sw.circleSize/2;
+	textSize(stSize);
+	text(s2, 0,sw.circleSize/4);
+
+
+  	pop();
 }
 
 
