@@ -111,6 +111,19 @@ function drawScoreScene(){
 
 	drawComment(windowWidth/2,windowHeight/2,20,10,'score');
 
+	var db = firebase.database();
+    var scoreBest = db.ref("/score");
+
+	scoreBest.on("value", function(snapshot) { 
+        var preBestScore = snapshot.val().best;
+    });
+
+    var myScore = wt.paCount;
+
+    if(myScore > preBestScore){
+    	scoreBest.set({title:"example", best:myScore});
+    }
+
 }
 
 
