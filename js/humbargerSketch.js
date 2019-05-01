@@ -114,8 +114,10 @@ function drawScoreScene(){
 	var db = firebase.database();
     var scoreBest = db.ref("/score");
 
+    var preBestScore = 0;
+
 	scoreBest.on("value", function(snapshot) { 
-        var preBestScore = snapshot.val().best;
+        preBestScore = snapshot.val().best;
     });
 
     var myScore = wt.paCount;
@@ -185,6 +187,7 @@ function drawMenus(){
   	btn.drawBtn();
 
   	drawScore();
+  	drawBestScore();
 }
 
 function initObjets(){
@@ -296,6 +299,42 @@ function drawScore(){
   	pop();
 }
 
+function drawBestScore(){
+	push();
+	rectMode(CENTER);
+
+  	translate(sw.posX/2*3,sw.posY);
+  	fill(255);
+  	noStroke();
+  	rect(0,0,sw.circleSize*2,sw.circleSize,20);
+
+  	stSize = 32;
+	textSize(stSize);
+	
+	var db = firebase.database();
+    var scoreBest = db.ref("/score");
+
+	var preBestScore = 0;
+
+	scoreBest.on("value", function(snapshot) { 
+        preBestScore = snapshot.val().best;
+    });
+
+	let s1 = 'ベストスコア';
+	let s2 = String(preBestScore) + 'cm';
+
+	textAlign(CENTER);
+	textSize(stSize);
+	fill(255);
+	text(s1,0,-sw.circleSize/2);
+	fill(0);
+	stSize = sw.circleSize/2;
+	textSize(stSize);
+	text(s2, 0,sw.circleSize/4);
+
+
+  	pop();
+}
 
 
 // function mouseReleased() {
