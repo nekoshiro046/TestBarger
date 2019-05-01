@@ -92,7 +92,7 @@ class stopWatch{
   updata(){
 
     this.sCount++;
-    if(this.sCount > this.fr/6){
+    if(this.sCount > this.fr/12){
       this.sCount = 0;
 
       this.second++;

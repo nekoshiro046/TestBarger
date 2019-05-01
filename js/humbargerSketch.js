@@ -14,20 +14,6 @@ var uScore = 0;
 
  
 function preload() {
-	// imges[0] = loadImage('assets/watermark.png');
-
-	// imges[1] = loadImage('assets/lettuce.png');
-	// imges[2] = loadImage('assets/tomato.png');
-	// imges[3] = loadImage('assets/patty.png');
-	// imges[4] = loadImage('assets/buns.png');
-
-	// imges[5] = loadImage('assets/lettuce2.png');
-	// imges[6] = loadImage('assets/tomato2.png');
-	// imges[7] = loadImage('assets/patty2.png');
-	// imges[8] = loadImage('assets/buns2.png');
-
-	// imges[9] = loadImage('assets/wow.png');
-
 	imges[0] = loadImage('assets/watermark.png');
 
 	imges[1] = loadImage('assets/lettuce.jp2');
@@ -86,7 +72,7 @@ function drawGameScene(){
 	//------------------menues------------
 	drawMenus();
 
-	if(wt.paCount > 4){
+	if(wt.paCount > 9){
 		drawComment(windowWidth/2,windowHeight/2,20,10,'wow');
 
 	}
