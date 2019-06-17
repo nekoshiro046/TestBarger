@@ -61,10 +61,17 @@ class waiter{
     if((this.position.x+d < windowWidth-this.objSize/2) && (this.position.x+d > 0) ) {
       this.position.x += d;
     }
+    if(d < 0){
+      this.imgID = int(random(2));
+    }else{
+      this.imgID = int(random(2,4));
+    }
 	}
 
 	drawImg(){
-		image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
+		// image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
+    image(waiterImg[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
+    
 		for(var i = 0,j=0; i < this.paCount; i++){
 			if(this.patties[i] != 0){
 				image(imges[this.patties[i]], this.position.x-this.objSize/2, this.position.y-j,this.objSize/2,this.objSize/4);

@@ -1,4 +1,5 @@
 var imges = [];
+var waiterImg = [];
 var objects = [];
 let objNum = 5;//obj_classの生成数
 var wt;//waiter_class
@@ -32,7 +33,12 @@ function preload() {
 
 	imges[11] = loadImage('assets/score.jp2');
 
-	imges[12] = loadImage('assets/back.jpg');
+	imges[12] = loadImage('assets/back_02.png');
+
+	waiterImg[0] = loadImage('assets/waiter_left_01.png');
+	waiterImg[1] = loadImage('assets/waiter_left_02.png');
+	waiterImg[2] = loadImage('assets/waiter_right_01.png');
+	waiterImg[3] = loadImage('assets/waiter_right_02.png');
 	
 }
 
@@ -51,9 +57,9 @@ function setup() {
 
   frameRate(fr);
 
-  sw = new stopWatch(fr,windowHeight/10,windowWidth/2,windowWidth/10);
+  sw = new stopWatch(fr,windowHeight/10,windowWidth/5,windowWidth/8);
   btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
-  wt = new waiter(windowWidth/2,windowHeight/5*4);
+  wt = new waiter(windowWidth/2,windowHeight/100*97);
   initObjets();
 
 }
@@ -95,6 +101,8 @@ function drawGameScene(){
 function drawEndScene(){
 	background(255);
 
+	image(imges[12], 0, 0,windowWidth,windowHeight);
+
 	drawMaterial();
 	wt.drawImg();
 	drawMenus();
@@ -104,6 +112,9 @@ function drawEndScene(){
 
 function drawScoreScene(){
 	background(255);
+
+	image(imges[12], 0, 0,windowWidth,windowHeight);
+
 
 	drawMaterial();
 	wt.drawImg();
@@ -130,7 +141,14 @@ function drawScoreScene(){
 
 
 function updata(){
-	wt.updata(btn.updata());
+	if(mouseIsPressed){
+		if(mouseX < windowWidth/2){
+			wt.updata(-10);
+		}else{
+			wt.updata(10);
+		}
+	}
+	// wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {//落ちてくる具材(オブジェクト)それぞれに対し当たり判定を行う
 		if(objects[i].position.x < wt.position.x 
@@ -173,21 +191,12 @@ function drawMaterial(){
 }
 
 function drawMenus(){
-	push();
-	fill(74,204,153);
-	noStroke();
-	rect(0,0,windowWidth,sw.posY+sw.circleSize);
-	fill(189,210,204);
-	noStroke();
-	rect(0,wt.position.y+wt.objSize,windowWidth,windowHeight);
-	pop();
+	drawScore();
+
 	if(scene == 1)sw.updata();
   	sw.drawWatch();
-  	btn.updata();
-  	btn.drawBtn();
-
-  	drawScore();
-  	drawBestScore();
+  	// btn.updata();
+  	// btn.drawBtn();
 }
 
 function initObjets(){
@@ -274,43 +283,23 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 
 function drawScore(){
 	push();
-	rectMode(CENTER);
+	// rectMode(CENTER);
 
-  	translate(sw.posX/2,sw.posY);
-  	fill(255);
-  	noStroke();
-  	rect(0,0,sw.circleSize*2,sw.circleSize,20);
+  	translate(windowWidth*2/3,sw.posY + sw.circleSize/4);
+  	// fill(255);
+  	// noStroke();
+  	// rect(0,0,sw.circleSize*2,sw.circleSize,20);
 
-  	stSize = 32;
+  	stSize = sw.circleSize/3;
 	textSize(stSize);
-	let s1 = 'スコア';
+	let s1 = 'Score';
 	let s2 = String(wt.paCount) + 'cm';
 
 	textAlign(CENTER);
-	textSize(stSize);
 	fill(255);
-	text(s1,0,-sw.circleSize/2);
-	fill(0);
-	stSize = sw.circleSize/2;
-	textSize(stSize);
-	text(s2, 0,sw.circleSize/4);
+	text(s1,0,-sw.circleSize/6);
+	text(s2, 0,sw.circleSize/6);
 
-
-  	pop();
-}
-
-function drawBestScore(){
-	push();
-	rectMode(CENTER);
-
-  	translate(sw.posX/2*3,sw.posY);
-  	fill(255);
-  	noStroke();
-  	rect(0,0,sw.circleSize*2,sw.circleSize,20);
-
-  	stSize = 32;
-	textSize(stSize);
-	
 	var db = firebase.database();
     var scoreBest = db.ref("/score");
 
@@ -320,21 +309,53 @@ function drawBestScore(){
         preBestScore = snapshot.val().best;
     });
 
-	let s1 = 'ベストスコア';
-	let s2 = String(preBestScore) + 'cm';
+	let s3 = 'Best';
+	let s4 = String(preBestScore) + 'cm';
 
-	textAlign(CENTER);
-	textSize(stSize);
-	fill(255);
-	text(s1,0,-sw.circleSize/2);
-	fill(0);
-	stSize = sw.circleSize/2;
-	textSize(stSize);
-	text(s2, 0,sw.circleSize/4);
+	text(s3,0,sw.circleSize/3*2);
+	text(s4, 0,sw.circleSize);
+
 
 
   	pop();
 }
+
+// function drawBestScore(){
+// 	push();
+// 	rectMode(CENTER);
+
+//   	translate(sw.posX/2*3,sw.posY);
+//   	fill(255);
+//   	noStroke();
+//   	rect(0,0,sw.circleSize*2,sw.circleSize,20);
+
+//   	stSize = 32;
+// 	textSize(stSize);
+	
+// 	var db = firebase.database();
+//     var scoreBest = db.ref("/score");
+
+// 	var preBestScore = 0;
+
+// 	scoreBest.on("value", function(snapshot) { 
+//         preBestScore = snapshot.val().best;
+//     });
+
+// 	let s1 = 'ベストスコア';
+// 	let s2 = String(preBestScore) + 'cm';
+
+// 	textAlign(CENTER);
+// 	textSize(stSize);
+// 	fill(255);
+// 	text(s1,0,-sw.circleSize/2);
+// 	fill(0);
+// 	stSize = sw.circleSize/2;
+// 	textSize(stSize);
+// 	text(s2, 0,sw.circleSize/4);
+
+
+//   	pop();
+// }
 
 
 // function mouseReleased() {
