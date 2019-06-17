@@ -3,6 +3,7 @@ var objects = [];
 let objNum = 5;//obj_classの生成数
 var wt;//waiter_class
 
+var canvas;
 var fr;//フレームレート
 
 //munu_classes
@@ -30,6 +31,8 @@ function preload() {
 	imges[10] = loadImage('assets/timeup.jp2');
 
 	imges[11] = loadImage('assets/score.jp2');
+
+	imges[12] = loadImage('assets/back.jpg');
 	
 }
 
@@ -37,7 +40,15 @@ function setup() {
 	fr = 10;
 	scene = 1;
   //slow down the frameRate to make it more visible
-  createCanvas(windowWidth, windowHeight,P2D);
+  canvas = createCanvas(windowWidth, windowHeight,P2D);
+
+  canvas.position(0,0);
+  canvas.style('position','fixed');
+  canvas.style('z-index','0');
+
+  canvas.parent('sketch-holder');
+
+
   frameRate(fr);
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/2,windowWidth/10);
@@ -63,6 +74,9 @@ function draw() {
 
 function drawGameScene(){
 	background(255);
+
+	image(imges[12], 0, 0,windowWidth,windowHeight);
+
 
 	updata();
 	drawMaterial();

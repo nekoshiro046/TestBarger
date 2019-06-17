@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8">
     <title>TestBarger</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,minimal-ui">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta http-equiv="content-language" content="ja" />
-    <script src="js/p5.js"></script>
+    <script src="libraries/p5.js" type="text/javascript"></script>
+    <script src="libraries/p5.sound.js" type="text/javascript"></script>
+    <script src="libraries/p5.dom.js" type="text/javascript"></script>
+
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.js"></script> -->
@@ -26,6 +29,12 @@
       firebase.initializeApp(config);
     </script>
 
+    <style type="text/css">
+		#sketch-holder {
+			margin: 0;
+		}
+	</style>
+
 
     <!-- <script src="js/dataBase.js"></script> -->
 
@@ -34,5 +43,6 @@
 
 </head>
 <body>
+	<div id="sketch-holder" onclick=""></div>
 </body>
 </html>
