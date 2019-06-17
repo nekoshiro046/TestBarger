@@ -59,7 +59,7 @@ function setup() {
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/5,windowWidth/8);
   btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
-  wt = new waiter(windowWidth/2,windowHeight/100*97);
+  wt = new waiter(windowWidth/2,windowHeight/100*98);
   initObjets();
 
 }
@@ -92,7 +92,7 @@ function drawGameScene(){
 	//------------------menues------------
 	drawMenus();
 
-	if(wt.paCount > 9){
+	if(wt.paCount > 2){
 		drawComment(windowWidth/2,windowHeight/2,20,10,'wow');
 
 	}
@@ -202,7 +202,8 @@ function drawMenus(){
 function initObjets(){
 	for (var i = 0; i < objNum; i++) {
 	  var posX = int(random(wt.objSize,windowWidth-wt.objSize));
-	  var posY = int(random(sw.posY));
+	  // var posY = int(random(sw.posY));
+	  var posY = windowHeight / 4;
 	  objects[i] = new object(posX,posY,sw.posY+sw.circleSizem,wt.position.y+wt.objSize);
 	}
 }
@@ -212,8 +213,8 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
   	if(commentCount < 20){
 	  	push();
 	  	translate(windowWidth/2,windowHeight/2);
-	  	tint(255,20);
-	  	image(imges[9], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	  	// tint(255,20);
+	  	image(imges[9], -windowHeight/8, -windowHeight/8,windowHeight/4,windowHeight/4);
 	  	pop();
 	  	commentCount++;
   	}

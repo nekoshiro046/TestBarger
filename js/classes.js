@@ -26,7 +26,8 @@ class object{
 
 	rest(){
 		var posX = random(windowWidth);
-		var posY = int(random(this.at));
+		// var posY = int(random(this.at));
+    var posY = windowHeight / 4;
 	  this.position = createVector(posX, posY);
     this.imgID = int(random(1,5));
 
@@ -62,9 +63,25 @@ class waiter{
       this.position.x += d;
     }
     if(d < 0){
-      this.imgID = int(random(2));
+      if(this.imgID == 0){
+        this.imgID = 1;
+      }
+      else if(this.imgID == 1){
+        this.imgID = 0;
+      }
+      else{
+        this.imgID = int(random(2));
+      }
     }else{
-      this.imgID = int(random(2,4));
+      if(this.imgID == 2){
+        this.imgID = 3;
+      }
+      else if(this.imgID == 3){
+        this.imgID = 2;
+      }
+      else{
+        this.imgID = int(random(2,4));
+      }
     }
 	}
 
