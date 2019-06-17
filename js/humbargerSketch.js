@@ -8,7 +8,8 @@ var canvas;
 var fr;//フレームレート
 
 //munu_classes
-var sw;var btn;
+var sw;
+// var btn;
 //シーン管理
 var scene;// 0: start画面 1:game画面 2:end画面 3:スコア画面
 var commentCount = 0;
@@ -39,6 +40,9 @@ function preload() {
 	waiterImg[1] = loadImage('assets/waiter_left_02.png');
 	waiterImg[2] = loadImage('assets/waiter_right_01.png');
 	waiterImg[3] = loadImage('assets/waiter_right_02.png');
+
+	waiterImg[4] = loadImage('assets/waiter_rolling.png');
+
 	
 }
 
@@ -58,7 +62,7 @@ function setup() {
   frameRate(fr);
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/5,windowWidth/8);
-  btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
+  // btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
   wt = new waiter(windowWidth/2,windowHeight/100*98);
   initObjets();
 
@@ -284,12 +288,8 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 
 function drawScore(){
 	push();
-	// rectMode(CENTER);
 
   	translate(windowWidth*2/3,sw.posY + sw.circleSize/4);
-  	// fill(255);
-  	// noStroke();
-  	// rect(0,0,sw.circleSize*2,sw.circleSize,20);
 
   	stSize = sw.circleSize/3;
 	textSize(stSize);
@@ -315,8 +315,6 @@ function drawScore(){
 
 	text(s3,0,sw.circleSize/3*2);
 	text(s4, 0,sw.circleSize);
-
-
 
   	pop();
 }
