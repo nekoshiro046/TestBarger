@@ -17,17 +17,25 @@ var uScore = 0;
 
  
 function preload() {
-	imges[0] = loadImage('assets/watermark.png');
+	// imges[0] = loadImage('assets/watermark.png');
 
-	imges[1] = loadImage('assets/lettuce.jp2');
-	imges[2] = loadImage('assets/tomato.jp2');
-	imges[3] = loadImage('assets/patty.jp2');
-	imges[4] = loadImage('assets/buns.jp2');
+	imges[0] = loadImage('assets/obj/sakanahone_t.jp2');
 
-	imges[5] = loadImage('assets/lettuce2.jp2');
-	imges[6] = loadImage('assets/tomato2.png');
-	imges[7] = loadImage('assets/patty2.jp2');
-	imges[8] = loadImage('assets/buns2.jp2');
+	imges[1] = loadImage('assets/obj/lettuce_top.jp2');
+	imges[2] = loadImage('assets/obj/tomato_top.jp2');
+	imges[3] = loadImage('assets/obj/patty_top.jp2');
+	imges[4] = loadImage('assets/obj/bunsU_top.jp2');
+
+	// imges[1] = loadImage('assets/obj/sakanahone_t.jp2');
+	// imges[2] = loadImage('assets/obj/sakanahone_t.jp2');
+	// imges[3] = loadImage('assets/obj/sakanahone_t.jp2');
+	// imges[4] = loadImage('assets/obj/sakanahone_t.jp2');
+
+
+	imges[5] = loadImage('assets/obj/lettuce_side.jp2');																	
+	imges[6] = loadImage('assets/obj/tomato_side.jp2');
+	imges[7] = loadImage('assets/obj/patty_side.jp2');
+	imges[8] = loadImage('assets/obj/bunsU_side.jp2');
 
 	imges[9] = loadImage('assets/wow.jp2');
 	imges[10] = loadImage('assets/timeup.jp2');
@@ -36,12 +44,13 @@ function preload() {
 
 	imges[12] = loadImage('assets/back_02.png');
 
-	waiterImg[0] = loadImage('assets/waiter_left_01.png');
-	waiterImg[1] = loadImage('assets/waiter_left_02.png');
-	waiterImg[2] = loadImage('assets/waiter_right_01.png');
-	waiterImg[3] = loadImage('assets/waiter_right_02.png');
+	waiterImg[0] = loadImage('assets/waiter/waiter_left_01.png');
+	waiterImg[1] = loadImage('assets/waiter/waiter_left_02.png');
+	waiterImg[2] = loadImage('assets/waiter/waiter_right_01.png');
+	waiterImg[3] = loadImage('assets/waiter/waiter_right_02.png');
 
-	waiterImg[4] = loadImage('assets/waiter_rolling.png');
+	waiterImg[4] = loadImage('assets/waiter/waiter_rolling_l.png');
+	waiterImg[5] = loadImage('assets/waiter/waiter_rolling_r.png');
 
 	
 }
@@ -155,6 +164,66 @@ function updata(){
 	// wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {//落ちてくる具材(オブジェクト)それぞれに対し当たり判定を行う
+		// if(wt.imgID == 0 || wt.imgID == 1){
+		// 	if(objects[i].position.x < wt.position.x 
+		// 		&& objects[i].position.x > (wt.position.x - wt.objSize)  
+		// 		&& objects[i].position.y < wt.position.y -wt.paHeight 
+		// 		&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/8))
+		// 	{
+		// 		if(objects[i].imgID == 1){
+		// 			wt.patties[wt.paCount] = 5;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else if(objects[i].imgID == 2){
+		// 			wt.patties[wt.paCount] = 6;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else if(objects[i].imgID == 3){
+		// 			wt.patties[wt.paCount] = 7;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else{
+		// 			wt.patties[wt.paCount] = 8;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		objects[i].rest();
+		// 	}
+
+		// }else if(wt.imgID == 2 || wt.imgID == 3){
+		// 	if(objects[i].position.x < wt.position.x 
+		// 		&& objects[i].position.x > (wt.position.x - wt.objSize)  
+		// 		&& objects[i].position.y < wt.position.y -wt.paHeight 
+		// 		&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/8))
+		// 	{
+		// 		if(objects[i].imgID == 1){
+		// 			wt.patties[wt.paCount] = 5;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else if(objects[i].imgID == 2){
+		// 			wt.patties[wt.paCount] = 6;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else if(objects[i].imgID == 3){
+		// 			wt.patties[wt.paCount] = 7;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		else{
+		// 			wt.patties[wt.paCount] = 8;
+		// 			wt.paCount++;
+		// 			wt.paHeight += wt.objSize/4;
+		// 		}
+		// 		objects[i].rest();
+		// 	}
+
+		// }
+
 		if(objects[i].position.x < wt.position.x 
 			&& objects[i].position.x > (wt.position.x - wt.objSize)  
 			&& objects[i].position.y < wt.position.y -wt.paHeight 
