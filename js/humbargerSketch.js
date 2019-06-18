@@ -93,7 +93,7 @@ function draw() {
 
 function drawGameScene(){
 	background(255);
-
+	imageMode(CORNERS);
 	image(imges[12], 0, 0,windowWidth,windowHeight);
 
 
@@ -113,7 +113,7 @@ function drawGameScene(){
 
 function drawEndScene(){
 	background(255);
-
+	imageMode(CORNERS);
 	image(imges[12], 0, 0,windowWidth,windowHeight);
 
 	drawMaterial();
@@ -125,7 +125,7 @@ function drawEndScene(){
 
 function drawScoreScene(){
 	background(255);
-
+	imageMode(CORNERS);
 	image(imges[12], 0, 0,windowWidth,windowHeight);
 
 
@@ -164,102 +164,112 @@ function updata(){
 	// wt.updata(btn.updata());
 
 	for (var i = 0; i < objNum; i++) {//落ちてくる具材(オブジェクト)それぞれに対し当たり判定を行う
-		// if(wt.imgID == 0 || wt.imgID == 1){
-		// 	if(objects[i].position.x < wt.position.x 
-		// 		&& objects[i].position.x > (wt.position.x - wt.objSize)  
-		// 		&& objects[i].position.y < wt.position.y -wt.paHeight 
-		// 		&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/8))
-		// 	{
-		// 		if(objects[i].imgID == 1){
-		// 			wt.patties[wt.paCount] = 5;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else if(objects[i].imgID == 2){
-		// 			wt.patties[wt.paCount] = 6;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else if(objects[i].imgID == 3){
-		// 			wt.patties[wt.paCount] = 7;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else{
-		// 			wt.patties[wt.paCount] = 8;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		objects[i].rest();
-		// 	}
+		if(wt.imgID == 0 || wt.imgID == 1){//左向き
+			if((objects[i].position.x)< wt.position.x 
+				&& (objects[i].position.x) > (wt.position.x - wt.objSize/3)  
+				&& wt.position.y - objects[i].position.y - wt.paHeight > 0
+				&& wt.position.y - objects[i].position.y - wt.paHeight < objects[i].objSize/4)
+			{
+				if(objects[i].imgID == 1){
+					wt.patties[wt.paCount] = 5;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else if(objects[i].imgID == 2){
+					wt.patties[wt.paCount] = 6;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else if(objects[i].imgID == 3){
+					wt.patties[wt.paCount] = 7;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else{
+					wt.patties[wt.paCount] = 8;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				objects[i].rest();
+			}else{
+				objects[i].updata();
+			}
 
-		// }else if(wt.imgID == 2 || wt.imgID == 3){
-		// 	if(objects[i].position.x < wt.position.x 
-		// 		&& objects[i].position.x > (wt.position.x - wt.objSize)  
-		// 		&& objects[i].position.y < wt.position.y -wt.paHeight 
-		// 		&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/8))
-		// 	{
-		// 		if(objects[i].imgID == 1){
-		// 			wt.patties[wt.paCount] = 5;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else if(objects[i].imgID == 2){
-		// 			wt.patties[wt.paCount] = 6;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else if(objects[i].imgID == 3){
-		// 			wt.patties[wt.paCount] = 7;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		else{
-		// 			wt.patties[wt.paCount] = 8;
-		// 			wt.paCount++;
-		// 			wt.paHeight += wt.objSize/4;
-		// 		}
-		// 		objects[i].rest();
-		// 	}
+		}else if(wt.imgID == 2 || wt.imgID == 3){//右向き
+			if((objects[i].position.x) > wt.position.x 
+				&& (objects[i].position.x) < (wt.position.x + wt.objSize/3) 
+				&& wt.position.y - objects[i].position.y - wt.paHeight > 0
+				&& wt.position.y - objects[i].position.y - wt.paHeight < objects[i].objSize/4)
+			{
+				if(objects[i].imgID == 1){
+					wt.patties[wt.paCount] = 5;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else if(objects[i].imgID == 2){
+					wt.patties[wt.paCount] = 6;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else if(objects[i].imgID == 3){
+					wt.patties[wt.paCount] = 7;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				else{
+					wt.patties[wt.paCount] = 8;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/5;
+				}
+				objects[i].rest();
+			}else{
+				objects[i].updata();
+			}
 
-		// }
-
-		if(objects[i].position.x < wt.position.x 
-			&& objects[i].position.x > (wt.position.x - wt.objSize)  
-			&& objects[i].position.y < wt.position.y -wt.paHeight 
-			&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
-		{
-			if(objects[i].imgID == 1){
-				wt.patties[wt.paCount] = 5;
-				wt.paCount++;
-				wt.paHeight += wt.objSize/4;
-			}
-			else if(objects[i].imgID == 2){
-				wt.patties[wt.paCount] = 6;
-				wt.paCount++;
-				wt.paHeight += wt.objSize/4;
-			}
-			else if(objects[i].imgID == 3){
-				wt.patties[wt.paCount] = 7;
-				wt.paCount++;
-				wt.paHeight += wt.objSize/4;
-			}
-			else{
-				wt.patties[wt.paCount] = 8;
-				wt.paCount++;
-				wt.paHeight += wt.objSize/4;
-			}
-			objects[i].rest();
-		}
-		else{
+		}else{
 			objects[i].updata();
 		}
+
+
+		// if(objects[i].position.x < wt.position.x 
+		// 	&& objects[i].position.x > (wt.position.x - wt.objSize)  
+		// 	&& objects[i].position.y < wt.position.y -wt.paHeight 
+		// 	&& objects[i].position.y > (wt.position.y -wt.paHeight-wt.objSize/4))
+		// {
+		// 	if(objects[i].imgID == 1){
+		// 		wt.patties[wt.paCount] = 5;
+		// 		wt.paCount++;
+		// 		wt.paHeight += wt.objSize/4;
+		// 	}
+		// 	else if(objects[i].imgID == 2){
+		// 		wt.patties[wt.paCount] = 6;
+		// 		wt.paCount++;
+		// 		wt.paHeight += wt.objSize/4;
+		// 	}
+		// 	else if(objects[i].imgID == 3){
+		// 		wt.patties[wt.paCount] = 7;
+		// 		wt.paCount++;
+		// 		wt.paHeight += wt.objSize/4;
+		// 	}
+		// 	else{
+		// 		wt.patties[wt.paCount] = 8;
+		// 		wt.paCount++;
+		// 		wt.paHeight += wt.objSize/4;
+		// 	}
+		// 	objects[i].rest();
+		// }
+		// else{
+		// 	objects[i].updata();
+		// }
+
 	}
 }
 
 function drawMaterial(){
 	for (var i = 0; i < objNum; i++) {
-	  objects[i].drawImg();
+		if(objects[i].position.y > windowHeight/4){
+			objects[i].drawImg();
+		}
 	}
 }
 
@@ -275,8 +285,8 @@ function drawMenus(){
 function initObjets(){
 	for (var i = 0; i < objNum; i++) {
 	  var posX = int(random(wt.objSize,windowWidth-wt.objSize));
-	  // var posY = int(random(sw.posY));
-	  var posY = windowHeight / 4;
+	  var posY = int(random(windowHeight / 4));
+	  // var posY = windowHeight / 4;
 	  objects[i] = new object(posX,posY,sw.posY+sw.circleSizem,wt.position.y+wt.objSize);
 	}
 }
@@ -287,6 +297,7 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 	  	push();
 	  	translate(windowWidth/2,windowHeight/2);
 	  	// tint(255,20);
+	  	imageMode(CORNERS);
 	  	image(imges[9], -windowHeight/8, -windowHeight/8,windowHeight/4,windowHeight/4);
 	  	pop();
 	  	commentCount++;
@@ -300,6 +311,7 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 	  	push();
 	  	translate(windowWidth/2,windowHeight/2);
 	  	tint(255,200);
+	  	imageMode(CORNERS);
 	  	image(imges[10], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
 	  	pop();
 	  	commentCount++;

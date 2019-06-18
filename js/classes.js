@@ -35,8 +35,8 @@ class object{
 	    
 	    if(this.position.y > this.areaBottom){
 	      var posX = random(windowWidth);
-        // var posY = int(random(-windowHeight/2,this.at));
-        var posY = windowHeight / 4;
+        var posY = int(random(windowHeight / 4));
+        // var posY = windowHeight / 4;
 	      this.position = createVector(posX, posY);
 
         // var rn = int(random(50));
@@ -57,8 +57,8 @@ class object{
 
 	rest(){
 		var posX = random(windowWidth);
-		// var posY = int(random(this.at));
-    var posY = windowHeight / 4;
+		var posY = int(random(windowHeight / 4));
+    // var posY = windowHeight / 4;
 	  this.position = createVector(posX, posY);
     // this.imgID = int(random(1,5));
     // var rn = int(random(50));
@@ -80,10 +80,12 @@ class object{
 	}
 
 	drawImg(){
+    imageMode(CENTER);
     if(this.imgID == 0){
-      image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y-this.objSize/2,this.objSize,this.objSize*2);
+      imageMode(CENTER);
+      image(imges[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize*2);
     }else{
-      image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y-this.objSize/2,this.objSize,this.objSize);
+      image(imges[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize);
     }
 	}
 
@@ -162,20 +164,21 @@ class waiter{
 	}
 
 	drawImg(){
+    imageMode(CENTER);
 		// image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
     if(this.imgID == 4 || this.imgID == 5){
-      image(waiterImg[this.imgID], this.position.x-this.objSize/2, this.position.y + this.objSize/2,this.objSize,this.objSize/2);
+      image(waiterImg[this.imgID], this.position.x, this.position.y + this.objSize*4/5,this.objSize,this.objSize/2);
     }
     else{
-      image(waiterImg[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
+      image(waiterImg[this.imgID], this.position.x, this.position.y + this.objSize/2,this.objSize,this.objSize);
     }
     
 		for(var i = 0,j=0; i < this.paCount; i++){
 			if(this.patties[i] != 0){
         if(this.imgID == 0 || this.imgID == 1){
-          image(imges[this.patties[i]], this.position.x-this.objSize/2, this.position.y-j+this.objSize/4,this.objSize/2,this.objSize/5);
+          image(imges[this.patties[i]], this.position.x-this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
         }else if(this.imgID == 2 || this.imgID == 3){
-          image(imges[this.patties[i]], this.position.x, this.position.y-j+this.objSize/4,this.objSize/2,this.objSize/5);
+          image(imges[this.patties[i]], this.position.x+this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
         }
 				j += this.objSize/8;
 			}
