@@ -34,7 +34,7 @@ class object{
 	    this.velocity.mult(0.98);
 	    
 	    if(this.position.y > this.areaBottom){
-	      var posX = random(windowWidth);
+	    var posX = random(this.objSize/2,windowWidth-this.objSize/2);
         var posY = int(random(windowHeight / 4));
         // var posY = windowHeight / 4;
 	      this.position = createVector(posX, posY);
@@ -56,7 +56,8 @@ class object{
 	}
 
 	rest(){
-		var posX = random(windowWidth);
+		// var posX = random(windowWidth);
+		var posX = random(this.objSize/2,windowWidth-this.objSize/2);
 		var posY = int(random(windowHeight / 4));
     // var posY = windowHeight / 4;
 	  this.position = createVector(posX, posY);
@@ -94,11 +95,11 @@ class object{
 class waiter{
 	constructor(x,y){
 
-		this.position = createVector(x, y);
-	  this.velocity = createVector(0, 0);
-	  this.imgID = 0;
-	  this.objSize = windowHeight/4;
-	  this.position.y -= this.objSize;
+	this.position = createVector(x, y);
+	this.velocity = createVector(0, 0);
+	this.imgID = 0;
+	this.objSize = windowHeight/4;
+	this.position.y -= this.objSize;
     this.stackingHeight = 0;
     this.patties = [];
     this.paCount = 0;
@@ -108,7 +109,7 @@ class waiter{
 	}
 
 	updata(d){
-    if((this.position.x+d < windowWidth-this.objSize/2) && (this.position.x+d > 0) ) {
+    if((this.position.x+d < windowWidth-this.objSize/2) && (this.position.x+d > this.objSize/2) ) {
       if(this.imgID == 4 || this.imgID == 5){
         this.position.x += 0;
       }else{
@@ -171,6 +172,10 @@ class waiter{
     }
     else{
       image(waiterImg[this.imgID], this.position.x, this.position.y + this.objSize/2,this.objSize,this.objSize);
+      // push();
+      // strokeWeight(10);
+      // point(this.position.x, this.position.y);
+      // pop();
     }
     
 		for(var i = 0,j=0; i < this.paCount; i++){
@@ -226,8 +231,11 @@ class stopWatch{
     push();
     translate(this.posX,this.posY);
     rotate(radians(this.second));
-    fill(0);
-    rect(0,0,4,this.needleSize);
+    // fill(200,64,89);
+    stroke(200,64,89);
+    strokeWeight(5);
+    line(0,0,0,this.needleSize);
+    // rect(0,0,4,this.needleSize);
     pop();
   }
 }
