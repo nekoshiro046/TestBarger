@@ -1,6 +1,7 @@
 var Ph_Bold_font,Ph_Reg_font,Tsukushi_font;
-var imges = [];
+var objImg = [];
 var waiterImg = [];
+var etcImg = [];
 var objects = [];
 let objNum = 5;//obj_classの生成数
 var wt;//waiter_class
@@ -18,47 +19,49 @@ var uScore = 0;
 
  
 function preload() {
-	// imges[0] = loadImage('assets/watermark.png');
+	// objImg[0] = loadImage('assets/watermark.png');
 
 	// font = loadFont('assets/font/Phenomena-Regular.otf');
 	Ph_Bold_font = loadFont('assets/font/Phenomena-Bold.otf');
 	Ph_Reg_font = loadFont('assets/font/Phenomena-Regular.otf');
 	// Tsukushi_font = loadFont('assets/font/TsukushiAMaruGothic.ttc');
 
-	imges[0] = loadImage('assets/image/obj/sakanahone_t.jp2');
+	objImg[0] = loadImage('assets/image/obj/sakanahone_t.jp2');
 
-	imges[1] = loadImage('assets/image/obj/lettuce_top.jp2');
-	imges[2] = loadImage('assets/image/obj/tomato_top.jp2');
-	imges[3] = loadImage('assets/image/obj/patty_top.jp2');
-	imges[4] = loadImage('assets/image/obj/bunsU_top.jp2');
+	objImg[1] = loadImage('assets/image/obj/lettuce_top.jp2');
+	objImg[2] = loadImage('assets/image/obj/tomato_top.jp2');
+	objImg[3] = loadImage('assets/image/obj/patty_top.jp2');
+	objImg[4] = loadImage('assets/image/obj/cheese_top.jp2');
+	objImg[5] = loadImage('assets/image/obj/bunsT_top.jp2');
+	objImg[6] = loadImage('assets/image/obj/bunsU_top.jp2');
 
-	// imges[1] = loadImage('assets/obj/sakanahone_t.jp2');
-	// imges[2] = loadImage('assets/obj/sakanahone_t.jp2');
-	// imges[3] = loadImage('assets/obj/sakanahone_t.jp2');
-	// imges[4] = loadImage('assets/obj/sakanahone_t.jp2');
+	// objImg[1] = loadImage('assets/obj/sakanahone_t.jp2');
+	// objImg[2] = loadImage('assets/obj/sakanahone_t.jp2');
+	// objImg[3] = loadImage('assets/obj/sakanahone_t.jp2');
+	// objImg[4] = loadImage('assets/obj/sakanahone_t.jp2');
 
 
-	imges[5] = loadImage('assets/image/obj/lettuce_side.jp2');																	
-	imges[6] = loadImage('assets/image/obj/tomato_side.jp2');
-	imges[7] = loadImage('assets/image/obj/patty_side.jp2');
-	imges[8] = loadImage('assets/image/obj/bunsU_side.jp2');
+	objImg[7] = loadImage('assets/image/obj/lettuce_side.jp2');																	
+	objImg[8] = loadImage('assets/image/obj/tomato_side.jp2');
+	objImg[9] = loadImage('assets/image/obj/patty_side.jp2');
+	objImg[10] = loadImage('assets/image/obj/cheese_side.jp2');
+	objImg[11] = loadImage('assets/image/obj/bunsT_side.jp2');
+	objImg[12] = loadImage('assets/image/obj/bunsU_side.jp2');
 
-	imges[9] = loadImage('assets/wow.jp2');
-	imges[10] = loadImage('assets/timeup.jp2');
-
-	imges[11] = loadImage('assets/score.jp2');
-
-	imges[12] = loadImage('assets/image/etc/back_02.png');
-	imges[13] = loadImage('assets/image/etc/res_back.png');
 
 	waiterImg[0] = loadImage('assets/image/waiter/waiter_left_01.png');
 	waiterImg[1] = loadImage('assets/image/waiter/waiter_left_02.png');
 	waiterImg[2] = loadImage('assets/image/waiter/waiter_right_01.png');
 	waiterImg[3] = loadImage('assets/image/waiter/waiter_right_02.png');
-
 	waiterImg[4] = loadImage('assets/image/waiter/waiter_rolling_l.png');
 	waiterImg[5] = loadImage('assets/image/waiter/waiter_rolling_r.png');
 
+
+	etcImg[0] = loadImage('assets/image/etc/wow.png');
+	etcImg[1] = loadImage('assets/image/etc/timeup.png');
+	etcImg[2] = loadImage('assets/image/etc/back_02.png');
+	etcImg[3] = loadImage('assets/image/etc/res_back.png');
+	etcImg[4] = loadImage('assets/image/etc/finish.png');
 	
 }
 
@@ -101,7 +104,7 @@ function draw() {
 function drawGameScene(){
 	background(255);
 	imageMode(CORNERS);
-	image(imges[12], 0, 0,windowWidth,windowHeight);
+	image(etcImg[2], 0, 0,windowWidth,windowHeight);
 
 
 	updata();
@@ -118,10 +121,11 @@ function drawGameScene(){
 	}
 }
 
-function drawEndScene(){
+function drawEndScene(
+	){
 	background(255);
 	imageMode(CORNERS);
-	image(imges[12], 0, 0,windowWidth,windowHeight);
+	image(etcImg[2], 0, 0,windowWidth,windowHeight);
 
 	drawMaterial();
 	wt.drawImg();
@@ -131,25 +135,10 @@ function drawEndScene(){
 }
 
 function drawScoreScene(){
-	// background(255);
-	// imageMode(CORNERS);
-	// image(imges[13], 0, 0);
-
-
-	// drawMaterial();
-	// wt.drawImg();
-	// drawMenus();
-
-	// drawComment(windowWidth/2,windowHeight/2,20,10,'score');
-
 	if(commentCount > 10){
 		background(255);
 		imageMode(CORNERS);
-		image(imges[13], 0, 0);
-  // 		push();
-	 //  	translate(windowWidth/2,windowHeight/2);
-		// image(imges[11], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
-		// pop();
+		image(etcImg[3], 0, 0);
 		push();
 		translate(windowWidth/2,windowHeight/2);
 		rectMode(CENTER);
@@ -162,13 +151,32 @@ function drawScoreScene(){
 
 		stSize = 32;
 		textSize(stSize);
-		let s1 = 'Score';
+		let s1 = 'Score : ';
 		let s2 = String(wt.paCount) + 'cm';
 		let s3 = 'RETRY';
+		let s4 = culBurName();
+		let sWidth = textWidth(s4);
 
 		fill(0);
-		text(s1, -stSize, 0);
-		text(s2, 0, stSize);
+		text(s1, -stSize, -windowHeight/3+stSize);
+		text(s2, stSize, -windowHeight/3+stSize);
+
+
+		// textFont("Sawarabi Mincho");
+		// var resStSize = '';
+		// if(sWidth > windowWidth/2){
+		// 	resStSize = 16;
+		// }else{
+		// 	resStSize = 32;
+		// }
+		// textAlign(CENTER);
+		// textSize(resStSize);
+		// text(s4, 0, 3*stSize);
+
+		drawBurNum();
+
+		textFont(Ph_Bold_font);
+		
 
 		//retry_Btn
 
@@ -241,22 +249,36 @@ function updata(){
 				&& wt.position.y + wt.objSize/4 - objects[i].position.y - wt.paHeight < objects[i].objSize/10)
 			{
 				if(objects[i].imgID == 1){
-					wt.patties[wt.paCount] = 5;
-					wt.paCount++;
-					wt.paHeight += wt.objSize/8;
-				}
-				else if(objects[i].imgID == 2){
-					wt.patties[wt.paCount] = 6;
-					wt.paCount++;
-					wt.paHeight += wt.objSize/8;
-				}
-				else if(objects[i].imgID == 3){
 					wt.patties[wt.paCount] = 7;
 					wt.paCount++;
 					wt.paHeight += wt.objSize/8;
 				}
-				else{
+				else if(objects[i].imgID == 2){
 					wt.patties[wt.paCount] = 8;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 3){
+					wt.patties[wt.paCount] = 9;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 4){
+					wt.patties[wt.paCount] = 10;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 5){
+					wt.patties[wt.paCount] = 11;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+
+					scene = 2;
+      				commentCount =0;
+      				drawComment(windowWidth/2,windowHeight/2,20,10,'finish');
+				}
+				else{
+					wt.patties[wt.paCount] = 12;
 					wt.paCount++;
 					wt.paHeight += wt.objSize/8;
 				}
@@ -272,22 +294,36 @@ function updata(){
 				&& wt.position.y + wt.objSize/4 - objects[i].position.y - wt.paHeight < objects[i].objSize/10)
 			{
 				if(objects[i].imgID == 1){
-					wt.patties[wt.paCount] = 5;
-					wt.paCount++;
-					wt.paHeight += wt.objSize/8;
-				}
-				else if(objects[i].imgID == 2){
-					wt.patties[wt.paCount] = 6;
-					wt.paCount++;
-					wt.paHeight += wt.objSize/8;
-				}
-				else if(objects[i].imgID == 3){
 					wt.patties[wt.paCount] = 7;
 					wt.paCount++;
 					wt.paHeight += wt.objSize/8;
 				}
-				else{
+				else if(objects[i].imgID == 2){
 					wt.patties[wt.paCount] = 8;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 3){
+					wt.patties[wt.paCount] = 9;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 4){
+					wt.patties[wt.paCount] = 10;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+				}
+				else if(objects[i].imgID == 5){
+					wt.patties[wt.paCount] = 11;
+					wt.paCount++;
+					wt.paHeight += wt.objSize/8;
+
+					scene = 2;
+      				commentCount =0;
+      				drawComment(windowWidth/2,windowHeight/2,20,10,'finish');
+				}
+				else{
+					wt.patties[wt.paCount] = 12;
 					wt.paCount++;
 					wt.paHeight += wt.objSize/8;
 				}
@@ -335,9 +371,9 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
   	if(commentCount < 20){
 	  	push();
 	  	translate(windowWidth/2,windowHeight/2);
-	  	// tint(255,20);
-	  	imageMode(CORNERS);
-	  	image(imges[9], -windowHeight/8, -windowHeight/8,windowHeight/4,windowHeight/4);
+	  	tint(255,180);
+	  	imageMode(CENTER);
+	  	image(etcImg[0], 0,0);
 	  	pop();
 	  	commentCount++;
   	}
@@ -349,9 +385,24 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
   	if(commentCount < 30){
 	  	push();
 	  	translate(windowWidth/2,windowHeight/2);
-	  	tint(255,200);
-	  	imageMode(CORNERS);
-	  	image(imges[10], -windowWidth/8, -windowWidth/8,windowWidth/4,windowWidth/4);
+	  	// tint(255,200);
+	  	imageMode(CENTER);
+	  	image(etcImg[4], 0,0);
+	  	pop();
+	  	commentCount++;
+  	}else{
+  		scene = 3;
+  		uScore = wt.paCount;
+  		commentCount = 0;
+  	}
+  }
+  else if(imgNa == 'finish'){
+  	if(commentCount < 30){
+	  	push();
+	  	translate(windowWidth/2,windowHeight/2);
+	  	// tint(255,200);
+	  	imageMode(CENTER);
+	  	image(etcImg[4], 0,0);
 	  	pop();
 	  	commentCount++;
   	}else{
@@ -399,5 +450,70 @@ function drawScore(){
 	text(s4, 0,sw.circleSize);
 
   	pop();
+}
+
+function drawBurName(){
+	textFont("Sawarabi Mincho");
+	var resStSize = '';
+	if(sWidth > windowWidth/2){
+		resStSize = 16;
+	}else{
+		resStSize = 32;
+	}
+	textAlign(CENTER);
+	textSize(resStSize);
+	text(s4, 0, 3*stSize);
+
+	// objImg[1] = loadImage('assets/image/obj/lettuce_top.jp2');
+	// objImg[2] = loadImage('assets/image/obj/tomato_top.jp2');
+	// objImg[3] = loadImage('assets/image/obj/patty_top.jp2');
+	// objImg[4] = loadImage('assets/image/obj/cheese_top.jp2');
+	// objImg[5] = loadImage('assets/image/obj/bunsT_top.jp2');
+	// objImg[6] = loadImage('assets/image/obj/bunsU_top.jp2');
+	var lettuceNum = 0,tomatoNum = 0,pattyNum = 0,cheeseNum = 0,bunsTNum = 0,bunsUNum = 1;
+	var posX,posY;
+	for(var i = 0; i < wt.paCount; i++){
+		if(wt.patties[i] ==  7)lettuceNum++;
+		if(wt.patties[i] ==  8)tomatoNum++;
+		if(wt.patties[i] ==  9)pattyNum++;
+		if(wt.patties[i] ==  10)cheeseNum++;
+		if(wt.patties[i] ==  11)bunsTNum++;
+		if(wt.patties[i] ==  12)bunsUNum++;
+	}
+
+	var s = '';
+	if(lettuceNum == 0 && tomatoNum == 0 && pattyNum == 0 && cheeseNum == 0 && bunsTNum == 1){
+		s = 'ただのパン';
+		return s;
+	}
+	if(lettuceNum > 0 && lettuceNum < 3){
+		s += 'レタス';
+	}
+	else if(lettuceNum >= 3){
+		s += 'メガレタス';
+	}
+	if(tomatoNum > 0 && tomatoNum < 3){
+		s += 'トマト';
+	}else if(tomatoNum >= 3){
+		s += 'メガトマト';
+	}
+	if(cheeseNum > 0 && cheeseNum < 3){
+		s += 'チーズ';
+	}else if(cheeseNum >= 3){
+		s += 'メガチーズ';
+	}
+	if(pattyNum > 0 && pattyNum < 3){
+		s += 'バーガー';
+	}else if(pattyNum >= 3){
+		s += 'メガバーガー';
+	}
+	if(bunsTNum == 1){
+		s += 'バーガー';
+	}else if(bunsTNum == 0){
+		s += 'バーガーもどき';
+	}
+
+	return s;
+
 }
 

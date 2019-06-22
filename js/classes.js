@@ -11,8 +11,8 @@ class object{
       //   this.imgID = int(random(1,5));
       // }
 
-      this.imgID = int(random(1,5));
-
+      this.imgID = int(random(1,7));
+      // this.imgID = 5;
       // this.gravity ;
       // if(this.imgID == 0){
       //   this.gravity = createVector(0,0.5);
@@ -20,7 +20,7 @@ class object{
       //   this.gravity = createVector(0,0.1);
       // }
 
-      this.gravity = createVector(0,0.1);
+      this.gravity = createVector(0,0.15);
 	    this.objSize = windowHeight/10;
       this.areaTop = at;
       this.areaBottom = ab;
@@ -50,7 +50,7 @@ class object{
         // }
 
         this.imgID = int(random(1,5));
-        this.gravity = createVector(0,0.1);
+        this.gravity = createVector(0,0.15);
 
 	    }
 	}
@@ -72,7 +72,7 @@ class object{
     //   }
 
       this.imgID = int(random(1,5));
-      this.gravity = createVector(0,0.1);
+      this.gravity = createVector(0,0.15);
 
 	}
 
@@ -84,9 +84,9 @@ class object{
     imageMode(CENTER);
     if(this.imgID == 0){
       imageMode(CENTER);
-      image(imges[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize*2);
+      image(objImg[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize*2);
     }else{
-      image(imges[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize);
+      image(objImg[this.imgID], this.position.x, this.position.y,this.objSize,this.objSize);
     }
 	}
 
@@ -102,7 +102,8 @@ class waiter{
 	this.position.y -= this.objSize;
     this.stackingHeight = 0;
     this.patties = [];
-    this.paCount = 0;
+    this.patties[0] = 12;
+    this.paCount = 1;
     this.paHeight = 0;
     this.rollingCount = 0;
 
@@ -166,7 +167,7 @@ class waiter{
 
 	drawImg(){
     imageMode(CENTER);
-		// image(imges[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
+		// image(objImg[this.imgID], this.position.x-this.objSize/2, this.position.y,this.objSize,this.objSize);
     if(this.imgID == 4 || this.imgID == 5){
       image(waiterImg[this.imgID], this.position.x, this.position.y + this.objSize*4/5,this.objSize,this.objSize/2);
     }
@@ -181,9 +182,9 @@ class waiter{
 		for(var i = 0,j=0; i < this.paCount; i++){
 			if(this.patties[i] != 0){
         if(this.imgID == 0 || this.imgID == 1){
-          image(imges[this.patties[i]], this.position.x-this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
+          image(objImg[this.patties[i]], this.position.x-this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
         }else if(this.imgID == 2 || this.imgID == 3){
-          image(imges[this.patties[i]], this.position.x+this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
+          image(objImg[this.patties[i]], this.position.x+this.objSize/4, this.position.y-j+this.objSize/3,this.objSize/2,this.objSize/5);
         }
 				j += this.objSize/8;
 			}
