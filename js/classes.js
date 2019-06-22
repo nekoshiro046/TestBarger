@@ -26,7 +26,7 @@ class object{
       this.areaBottom = ab;
 	}
 
-	updata(){
+	updata(t){
 		this.acceleration.add(this.gravity);
 	    this.velocity.add(this.acceleration);
 	    this.position.add(this.velocity);
@@ -48,8 +48,15 @@ class object{
         //   this.gravity = createVector(0,0.1);
 
         // }
-
-        this.imgID = int(random(1,5));
+        if(t > 240){
+          var rn = int(random(3));
+          if(rn == 0){
+            this.imgID = 5;
+          }else{
+            this.imgID = int(random(1,7));
+          }
+        }
+        this.imgID = int(random(1,7));
         this.gravity = createVector(0,0.15);
 
 	    }
@@ -71,7 +78,7 @@ class object{
     //     this.gravity = createVector(0,0.1);
     //   }
 
-      this.imgID = int(random(1,5));
+      this.imgID = int(random(1,7));
       this.gravity = createVector(0,0.15);
 
 	}
