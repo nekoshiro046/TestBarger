@@ -15,13 +15,11 @@ var sw;
 //シーン管理
 var scene;// 0: start画面 1:game画面 2:end画面 3:スコア画面
 var commentCount = 0;
-var uScore = 0;
+var uScore = 0,preBestScore = 0;
+var snedRecord = false;var uTitle ;
 
  
 function preload() {
-	// objImg[0] = loadImage('assets/watermark.png');
-
-	// font = loadFont('assets/font/Phenomena-Regular.otf');
 	Ph_Bold_font = loadFont('assets/font/Phenomena-Bold.otf');
 	Ph_Reg_font = loadFont('assets/font/Phenomena-Regular.otf');
 	Tsukushi_font = loadFont('assets/font/TsukushiAMaruGothic.otf');
@@ -34,12 +32,6 @@ function preload() {
 	objImg[4] = loadImage('assets/image/obj/cheese_top.jp2');
 	objImg[5] = loadImage('assets/image/obj/bunsT_top.jp2');
 	objImg[6] = loadImage('assets/image/obj/bunsU_top.jp2');
-
-	// objImg[1] = loadImage('assets/obj/sakanahone_t.jp2');
-	// objImg[2] = loadImage('assets/obj/sakanahone_t.jp2');
-	// objImg[3] = loadImage('assets/obj/sakanahone_t.jp2');
-	// objImg[4] = loadImage('assets/obj/sakanahone_t.jp2');
-
 
 	objImg[7] = loadImage('assets/image/obj/lettuce_side.jp2');																	
 	objImg[8] = loadImage('assets/image/obj/tomato_side.jp2');
@@ -62,6 +54,13 @@ function preload() {
 	etcImg[2] = loadImage('assets/image/etc/back_02.png');
 	etcImg[3] = loadImage('assets/image/etc/res_back.png');
 	etcImg[4] = loadImage('assets/image/etc/finish.png');
+
+	var db = firebase.database();
+    var scoreBest = db.ref("/score");
+
+	scoreBest.on("value", function(snapshot) { 
+        preBestScore = snapshot.val().best;
+    });
 	
 }
 
@@ -69,6 +68,7 @@ function setup() {
 	fr = 10;
 	scene = 1;
   //slow down the frameRate to make it more visible
+  
   canvas = createCanvas(windowWidth, windowHeight,P2D);
 
   canvas.position(0,0);
@@ -96,10 +96,6 @@ function draw() {
 		drawScoreScene();
 	}
 }
-
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
-// }
 
 function drawGameScene(){
 	background(255);
@@ -163,14 +159,17 @@ function drawScoreScene(){
 		    addBreakStr += s4 + '\n';
 		    sliceStr = s5;
 		}
-		let s6 = culBurTitle();
+		if(uTitle == null){
+			uTitle = culBurTitle();
+		}
 		fill(0);
 		text(s1, -stSize, -windowHeight/3+stSize/3*2);
 		text(s2, stSize, -windowHeight/3+stSize/3*2);
 		textFont(Tsukushi_font);
 		fill(200,64,89);
-		text(s6, 0, -windowHeight/3+stSize*2);
+		text(uTitle, 0, -windowHeight/3+stSize*2);
 		fill(0,240);
+		textSize(windowWidth/20);
 		text(addBreakStr, 0, -windowHeight/3+stSize*3+stSize/3*2);
 		textFont(Ph_Bold_font);
 		
@@ -201,7 +200,6 @@ function drawScoreScene(){
 		}
 
 		pop();
-
   	}else{
   		commentCount++;
   		push();
@@ -213,23 +211,6 @@ function drawScoreScene(){
 		pop();
 
   	}
-
-
-
-	var db = firebase.database();
-    var scoreBest = db.ref("/score");
-
-    var preBestScore = 0;
-
-	scoreBest.on("value", function(snapshot) { 
-        preBestScore = snapshot.val().best;
-    });
-
-    var myScore = wt.paCount;
-
-    if(myScore > preBestScore){
-    	scoreBest.set({title:"example", best:myScore});
-    }
 
 }
 
@@ -278,7 +259,7 @@ function updata(){
 
 					scene = 2;
       				commentCount =0;
-      				drawComment(windowWidth/2,windowHeight/2,20,10,'finish');
+      				drawComment(windowWidth/2,windowHeight/2,20,10,'timeup');
 				}
 				else{
 					wt.patties[wt.paCount] = 12;
@@ -286,8 +267,10 @@ function updata(){
 					wt.paHeight += wt.objSize/8;
 				}
 				objects[i].rest();
+				continue;
 			}else{
 				objects[i].updata(sw.second);
+				continue;
 			}
 
 		}else if(wt.imgID == 2 || wt.imgID == 3){//右向き
@@ -323,7 +306,7 @@ function updata(){
 
 					scene = 2;
       				commentCount =0;
-      				drawComment(windowWidth/2,windowHeight/2,20,10,'finish');
+      				drawComment(windowWidth/2,windowHeight/2,20,10,'timeup');
 				}
 				else{
 					wt.patties[wt.paCount] = 12;
@@ -331,8 +314,10 @@ function updata(){
 					wt.paHeight += wt.objSize/8;
 				}
 				objects[i].rest();
+				continue;
 			}else{
 				objects[i].updata(sw.second);
+				continue;
 			}
 
 		}else{
@@ -352,16 +337,13 @@ function drawMaterial(){
 
 function drawMenus(){
 	drawScore();
-
 	if(scene == 1)sw.updata();
   	sw.drawWatch();
-  	// btn.updata();
-  	// btn.drawBtn();
 }
 
 function initObjets(){
 	for (var i = 0; i < objNum; i++) {
-		var posX = random(this.objSize/2,windowWidth-this.objSize/2);
+		var posX = random(wt.objSize/2,windowWidth-wt.objSize/2);
 	  	var posX = int(random(wt.objSize,windowWidth-wt.objSize));
 	  	var posY = int(random(windowHeight / 4));
 	  	// var posY = windowHeight / 4;
@@ -380,9 +362,6 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
 	  	pop();
 	  	commentCount++;
   	}
-  	// else{
-  	// 	comentCount=0;
-  	// }
   }
   else if(imgNa == 'timeup'){
   	if(commentCount < 30){
@@ -398,25 +377,6 @@ function drawComment(ox,oy,r,vertexNum,imgNa) {
   		uScore = wt.paCount;
   		commentCount = 0;
   	}
-  }
-  else if(imgNa == 'finish'){
-  	if(commentCount < 30){
-	  	push();
-	  	translate(windowWidth/2,windowHeight/2);
-	  	// tint(255,200);
-	  	imageMode(CENTER);
-	  	image(etcImg[4], 0,0);
-	  	pop();
-	  	commentCount++;
-  	}else{
-  		scene = 3;
-  		uScore = wt.paCount;
-  		commentCount = 0;
-  	}
-  }
-
-  else if(imgNa == 'score'){
-
   }
   
 }
@@ -437,15 +397,6 @@ function drawScore(){
 	text(s1,0,-sw.circleSize/6);
 	text(s2, 0,sw.circleSize/6);
 
-	var db = firebase.database();
-    var scoreBest = db.ref("/score");
-
-	var preBestScore = 0;
-
-	scoreBest.on("value", function(snapshot) { 
-        preBestScore = snapshot.val().best;
-    });
-
 	let s3 = 'Best';
 	let s4 = String(preBestScore) + 'cm';
 
@@ -457,7 +408,6 @@ function drawScore(){
 
 function culBurTitle(){
 	var lettuceNum = 0,tomatoNum = 0,pattyNum = 0,cheeseNum = 0,bunsTNum = 0,bunsUNum = 1;
-	var posX,posY;
 	for(var i = 0; i < wt.paCount; i++){
 		if(wt.patties[i] ==  7)lettuceNum++;
 		if(wt.patties[i] ==  8)tomatoNum++;
@@ -468,29 +418,45 @@ function culBurTitle(){
 	}
 
 	var s;
+	//レア度高いほうが先
+
+	if(wt.paCount > preBestScore){
+		s = '「NewRecordHolder」';
+		var db = firebase.database();
+		var scoreBest = db.ref("/score");
+		scoreBest.set({title:"example", best:wt.paCount});
+		return s;
+	}
+
+	if(lettuceNum == 0 && tomatoNum == 0 && pattyNum == 0 && cheeseNum == 0 && bunsTNum == 1){
+		s = '「真ん中切っただけ...」';
+		return s;
+	}
+
+	if(wt.imgID == 4 || wt.imgID == 5){
+		s = '「ロンリーガール」';
+		return s;
+	}
 
 	if(lettuceNum >= 2 && tomatoNum >= 2 && pattyNum >= 2 && cheeseNum >= 2 && bunsTNum == 1){
 		s = '「いっぱい食べる君が好き」';
 		return s;
 	}
 
-	if((lettuceNum +tomatoNum) == 0){
-		s = '野菜不足';
+	// if(wt.patties[wt.paCount-1] == 12){
+	// 	s = '「ニアピニスト」';
+	// 	return s;
+	// }
+
+	if((lettuceNum +tomatoNum) == 0 && pattyNum < 6){
+		s = '「野菜不足」';
 		return s;
 	}
 
 	if(pattyNum >= 6){
-		s = '肉食家';
+		s = '「肉食家」';
 		return s;
 	}
-
-	// if(lettuceNum >= 4 || tomatoNum >= 4){
-	// 	s = '「人間サラダバー」';
-	// 	return s;
-	// }
-	// if(cheeseNum >= 4){
-	// 	s = '牛飼い';
-	// }
 	if(s == null){
 		s = '「称号なし」';
 		return s;
@@ -499,7 +465,6 @@ function culBurTitle(){
 }
 function culBurName(){
 	var lettuceNum = 0,tomatoNum = 0,pattyNum = 0,cheeseNum = 0,bunsTNum = 0,bunsUNum = 1;
-	var posX,posY;
 	for(var i = 0; i < wt.paCount; i++){
 		if(wt.patties[i] ==  7)lettuceNum++;
 		if(wt.patties[i] ==  8)tomatoNum++;
@@ -510,7 +475,7 @@ function culBurName(){
 	}
 
 	var s = '';
-	if(lettuceNum == 0 && tomatoNum == 0 && pattyNum == 0 && cheeseNum == 0 && bunsTNum == 1){
+	if(lettuceNum == 0 && tomatoNum == 0 && pattyNum == 0 && cheeseNum == 0){
 		s = 'ただのパン';
 		return s;
 	}
@@ -518,7 +483,7 @@ function culBurName(){
 	if((lettuceNum +tomatoNum) >= 2 && (lettuceNum +tomatoNum) < 4){
 		s += 'ヤサイ';
 	}else if((lettuceNum +tomatoNum) >= 4){
-		s += 'メガヤサイ';
+		s += 'モリモリヤサイ';
 	}
 
 	if(cheeseNum > 0 && cheeseNum < 2){
@@ -529,8 +494,8 @@ function culBurName(){
 		s += 'トリプルチーズ';
 	}else if(cheeseNum >= 4 && cheeseNum < 5){
 		s += 'クワトロチーズ';
-	}else{
-		s += 'メガチーズ';
+	}else if(cheeseNum >= 5){
+		s += 'チーーーズ';
 	}
 
 	if(pattyNum > 1 && pattyNum < 3){
