@@ -54,21 +54,13 @@ function preload() {
 	etcImg[2] = loadImage('assets/image/etc/back_02.png');
 	etcImg[3] = loadImage('assets/image/etc/res_back.png');
 	etcImg[4] = loadImage('assets/image/etc/finish.png');
-
-	var db = firebase.database();
-    var scoreBest = db.ref("/score");
-
-	scoreBest.on("value", function(snapshot) { 
-        preBestScore = snapshot.val().best;
-    });
-	
 }
 
 function setup() {
 	fr = 10;
 	scene = 1;
   //slow down the frameRate to make it more visible
-  
+
   canvas = createCanvas(windowWidth, windowHeight,P2D);
 
   canvas.position(0,0);
@@ -79,6 +71,14 @@ function setup() {
 
 
   frameRate(fr);
+
+  var db = firebase.database();
+  var scoreBest = db.ref("/score");
+
+	scoreBest.on("value", function(snapshot) { 
+        preBestScore = snapshot.val().best;
+    });
+
 
   sw = new stopWatch(fr,windowHeight/10,windowWidth/5,windowWidth/8);
   // btn = new moveBtn(windowWidth / 4,windowHeight / 10*9,windowWidth / 4*3,windowHeight / 10*9,windowHeight/10 /4 * 3);
@@ -433,20 +433,15 @@ function culBurTitle(){
 		return s;
 	}
 
-	if(wt.imgID == 4 || wt.imgID == 5){
-		s = '「ロンリーガール」';
-		return s;
-	}
-
 	if(lettuceNum >= 2 && tomatoNum >= 2 && pattyNum >= 2 && cheeseNum >= 2 && bunsTNum == 1){
 		s = '「いっぱい食べる君が好き」';
 		return s;
 	}
 
-	// if(wt.patties[wt.paCount-1] == 12){
-	// 	s = '「ニアピニスト」';
-	// 	return s;
-	// }
+	if(wt.imgID == 4 || wt.imgID == 5){
+		s = '「ドジっ子」';
+		return s;
+	}
 
 	if((lettuceNum +tomatoNum) == 0 && pattyNum < 6){
 		s = '「野菜不足」';
