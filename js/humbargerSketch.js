@@ -238,19 +238,19 @@ function touchEnded(){
 			stP++;
 		}else if(stP == 1){
 			if(mouseX >= windowWidth/2){
-				stP++;
+				stP = 2;
 			}
 		}else if(stP == 2){
 			if(mouseX < windowWidth/2){
-				stP--;
+				stP = 1;
 			}else{
-				stP++;
+				stP = 3;
 			}
 		}else if(stP == 3){
 			if(mouseX < windowWidth/2){
-				stP--;
+				stP = 2;
 			}else{
-				stP++;
+				stP = 4;
 			}
 		}else if(stP == 4){
 			if((mouseX - windowWidth/2 > -windowWidth/4) 
