@@ -51,7 +51,7 @@ function preload() {
 
 	etcImg[0] = loadImage('assets/image/etc/wow.png');
 	etcImg[1] = loadImage('assets/image/etc/timeup.png');
-	etcImg[2] = loadImage('assets/image/etc/back_02.png');
+	etcImg[2] = loadImage('assets/image/etc/back_02.jpg');
 	etcImg[3] = loadImage('assets/image/etc/res_back.png');
 	etcImg[4] = loadImage('assets/image/etc/finish.png');
 }
