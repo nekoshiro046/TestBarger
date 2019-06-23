@@ -59,6 +59,8 @@ function preload() {
 	etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
 	etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
 	etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
+	etcImg[9] = loadImage('assets/image/etc/logoText.jpg');
+	
 }
 
 function setup() {
@@ -103,11 +105,14 @@ function draw() {
 		drawScoreScene();
 	}
 }
+
 function drawStartScene(){
 	background(255);
 	if(stP == 0){
 		imageMode(CENTER);
-		image(etcImg[5], windowWidth/2,windowHeight/2);
+		image(etcImg[5], windowWidth/2,windowHeight/3*2);
+		image(etcImg[9], windowWidth/2,windowHeight/4);
+		
 	}else if(stP == 1){
 		imageMode(CORNERS);
 		image(etcImg[6], 0, 0,windowWidth,windowHeight);
