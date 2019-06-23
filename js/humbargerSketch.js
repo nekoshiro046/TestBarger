@@ -235,7 +235,7 @@ function drawStartScene(){
 function touchEnded(){
 	if(scene == 0){
 		if(stP == 0){
-			stP++;
+			stP = 1;
 		}else if(stP == 1){
 			if(mouseX >= windowWidth/2){
 				stP = 2;
@@ -593,11 +593,6 @@ function culBurTitle(){
 		var db = firebase.database();
 		var scoreBest = db.ref("/score");
 		scoreBest.set({title:"example", best:wt.paCount});
-		return s;
-	}
-
-	if(lettuceNum == 0 && tomatoNum == 0 && pattyNum == 0 && cheeseNum == 0 && bunsTNum == 1){
-		s = '「真ん中切っただけ...」';
 		return s;
 	}
 
