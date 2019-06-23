@@ -112,6 +112,15 @@ function drawStartScene(){
 		imageMode(CENTER);
 		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
 		// image(etcImg[9], windowWidth/2,windowHeight/4);
+		push();
+		textAlign(CENTER);
+		textFont(Ph_Bold_font);
+
+		textSize(windowWidth/6);
+		fill(200,64,89);
+		text('NOMNOM', windowWidth/2, windowHeight/4);
+		text('THE GAME', windowWidth/2, windowHeight/4*3);
+		pop();
 		
 	}else if(stP == 1){
 		imageMode(CORNERS);
@@ -155,7 +164,14 @@ function drawStartScene(){
 	}else if(stP == 4){
 		imageMode(CENTER);
 		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
+
 		push();
+		textAlign(CENTER);
+		textFont(Ph_Bold_font);
+
+		textSize(windowWidth/6);
+		fill(200,64,89);
+		text('NOMNOM', windowWidth/2, windowHeight/4);
 		translate(windowWidth/2,windowHeight/2);
 
 		fill(20,50,101);
