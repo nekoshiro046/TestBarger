@@ -110,8 +110,8 @@ function drawStartScene(){
 	background(255);
 	if(stP == 0){
 		imageMode(CENTER);
-		image(etcImg[5], windowWidth/2,windowHeight/3*2);
-		image(etcImg[9], windowWidth/2,windowHeight/4);
+		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
+		// image(etcImg[9], windowWidth/2,windowHeight/4);
 		
 	}else if(stP == 1){
 		imageMode(CORNERS);
@@ -154,7 +154,7 @@ function drawStartScene(){
 		pop();
 	}else if(stP == 4){
 		imageMode(CENTER);
-		image(etcImg[5], windowWidth/2,windowHeight/2);
+		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
 		push();
 		translate(windowWidth/2,windowHeight/2);
 
@@ -185,14 +185,43 @@ function drawStartScene(){
 	}
 }
 
-function mousePressed(){
+// function mousePressed(){
+// 	if(scene == 0){
+// 		if(stP == 0){
+// 			stP++;
+// 		}else if(stP == 1){
+// 			if(mouseX >= windowWidth/2){
+// 				stP++;
+// 			}
+// 		}else if(stP == 2){
+// 			if(mouseX < windowWidth/2){
+// 				stP--;
+// 			}else{
+// 				stP++;
+// 			}
+// 		}else if(stP == 3){
+// 			if(mouseX < windowWidth/2){
+// 				stP--;
+// 			}else{
+// 				stP++;
+// 			}
+// 		}else if(stP == 4){
+// 			if((mouseX - windowWidth/2 > -windowWidth/4) 
+// 			&& (mouseX - windowWidth/2 < windowWidth/4) 
+// 			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
+// 			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
+// 				scene = 1;
+// 			}
+// 		}
+// 	}
+// }
+
+function touchEnded(){
 	if(scene == 0){
 		if(stP == 0){
 			stP++;
 		}else if(stP == 1){
-			if(mouseX < windowWidth/2){
-				stP--;
-			}else{
+			if(mouseX >= windowWidth/2){
 				stP++;
 			}
 		}else if(stP == 2){
@@ -216,6 +245,7 @@ function mousePressed(){
 			}
 		}
 	}
+
 }
 
 
