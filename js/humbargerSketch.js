@@ -17,6 +17,7 @@ var scene;// 0: start画面 1:game画面 2:end画面 3:スコア画面
 var commentCount = 0;
 var uScore = 0,preBestScore = 0;
 var snedRecord = false;var uTitle ;
+var stP = 0;
 
  
 function preload() {
@@ -54,11 +55,15 @@ function preload() {
 	etcImg[2] = loadImage('assets/image/etc/back_02.jpg');
 	etcImg[3] = loadImage('assets/image/etc/res_back.png');
 	etcImg[4] = loadImage('assets/image/etc/finish.png');
+	etcImg[5] = loadImage('assets/image/etc/startLogo.jpg');
+	etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
+	etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
+	etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
 }
 
 function setup() {
 	fr = 10;
-	scene = 1;
+	scene = 0;
   //slow down the frameRate to make it more visible
 
   canvas = createCanvas(windowWidth, windowHeight,P2D);
@@ -88,7 +93,9 @@ function setup() {
 }
 
 function draw() {
-	if(scene == 1){
+	if(scene == 0){
+		drawStartScene();
+	}else if(scene == 1){
 		drawGameScene();
 	}else if(scene == 2){
 		drawEndScene();
@@ -96,6 +103,116 @@ function draw() {
 		drawScoreScene();
 	}
 }
+function drawStartScene(){
+	background(255);
+	if(stP == 0){
+		imageMode(CENTER);
+		image(etcImg[5], windowWidth/2,windowHeight/2);
+	}else if(stP == 1){
+		imageMode(CORNERS);
+		image(etcImg[6], 0, 0,windowWidth,windowHeight);
+		push();
+		translate(windowWidth/2,windowHeight/6);
+		noStroke();
+		fill(200,64,89);
+		ellipse(-40,0,20,20);
+		fill(20,50,101);
+		ellipse(0,0,20,20);
+		fill(20,50,101);
+		ellipse(40,0,20,20);
+		pop();
+	}else if(stP == 2){
+		imageMode(CORNERS);
+		image(etcImg[7], 0, 0,windowWidth,windowHeight);
+		push();
+		translate(windowWidth/2,windowHeight/6);
+		noStroke();
+		fill(20,50,101);
+		ellipse(-40,0,20,20);
+		fill(200,64,89);
+		ellipse(0,0,20,20);
+		fill(20,50,101);
+		ellipse(40,0,20,20);
+		pop();
+	}else if(stP == 3){
+		imageMode(CORNERS);
+		image(etcImg[8], 0, 0,windowWidth,windowHeight);
+		push();
+		translate(windowWidth/2,windowHeight/6);
+		noStroke();
+		fill(20,50,101);
+		ellipse(-40,0,20,20);
+		fill(20,50,101);
+		ellipse(0,0,20,20);
+		fill(200,64,89);
+		ellipse(40,0,20,20);
+		pop();
+	}else if(stP == 4){
+		imageMode(CENTER);
+		image(etcImg[5], windowWidth/2,windowHeight/2);
+		push();
+		translate(windowWidth/2,windowHeight/2);
+
+		fill(20,50,101);
+		noStroke();
+		rectMode(CENTER);
+		rect(0,windowHeight/3,windowWidth/2,windowWidth/5,20);
+		textAlign(CENTER);
+		textFont(Ph_Bold_font);
+
+		textSize(windowWidth/6);
+		fill(200,64,89);
+		text('START', 0, windowHeight/8*3);
+		// if((mouseX - windowWidth/2 > -windowWidth/4) 
+		// 	&& (mouseX - windowWidth/2 < windowWidth/4) 
+		// 	&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
+		// 	&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
+		// 	fill(200,64,89);
+		// 	text('START', 0, windowHeight/8*3);
+		// 	if(mouseIsPressed)setup();
+		// }else{
+		// 	fill(67,158,157);
+		// 	text('START', 0, windowHeight/8*3);
+		// }
+
+		pop();
+
+	}
+}
+
+function mousePressed(){
+	if(scene == 0){
+		if(stP == 0){
+			stP++;
+		}else if(stP == 1){
+			if(mouseX < windowWidth/2){
+				stP--;
+			}else{
+				stP++;
+			}
+		}else if(stP == 2){
+			if(mouseX < windowWidth/2){
+				stP--;
+			}else{
+				stP++;
+			}
+		}else if(stP == 3){
+			if(mouseX < windowWidth/2){
+				stP--;
+			}else{
+				stP++;
+			}
+		}else if(stP == 4){
+			if((mouseX - windowWidth/2 > -windowWidth/4) 
+			&& (mouseX - windowWidth/2 < windowWidth/4) 
+			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
+			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
+				scene = 1;
+			}
+		}
+	}
+}
+
 
 function drawGameScene(){
 	background(255);
@@ -178,13 +295,13 @@ function drawScoreScene(){
 
 		fill(20,50,101);
 		noStroke();
-		rect(0,windowHeight/3,windowWidth/2,windowWidth/4,20);
+		rect(0,windowHeight/3,windowWidth/2,windowWidth/5,20);
 
 		textSize(windowWidth/6);
 		if((mouseX - windowWidth/2 > -windowWidth/4) 
 			&& (mouseX - windowWidth/2 < windowWidth/4) 
-			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/8)
-			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/8)){
+			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
+			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
 			fill(200,64,89);
 			text(s3, 0, windowHeight/8*3);
 			if(mouseIsPressed)setup();
