@@ -234,22 +234,26 @@ function drawStartScene(){
 
 function touchEnded(){
 	if(scene == 0){
+		var count = 0;
 		if(stP == 0){
 			stP = 1;
 		}else if(stP == 1){
-			if(mouseX >= windowWidth/2){
+			count++;
+			if(mouseX >= windowWidth/2 && count == 1){
 				stP = 2;
 			}
 		}else if(stP == 2){
-			if(mouseX < windowWidth/2){
+			count++;
+			if(mouseX < windowWidth/2 && count == 1){
 				stP = 1;
-			}else{
+			}else if(mouseX >= windowWidth/2 && count == 1){
 				stP = 3;
 			}
 		}else if(stP == 3){
+			count++;
 			if(mouseX < windowWidth/2){
 				stP = 2;
-			}else{
+			}else if(mouseX >= windowWidth/2 && count == 1){
 				stP = 4;
 			}
 		}else if(stP == 4){
