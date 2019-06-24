@@ -11,6 +11,8 @@
     <script src="libraries/p5.sound.js" type="text/javascript"></script>
     <script src="libraries/p5.dom.js" type="text/javascript"></script>
 
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.js"></script> -->
@@ -41,8 +43,29 @@
     <script src="js/classes.js"></script>
     <script src="js/humbargerSketch.js"></script>
 
+            <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
 </head>
 <body>
 	<div id="sketch-holder" onclick=""></div>
+    <div id="opening"></div>
+        <div class="walkThrough">
+            <img id="wt_p1" src="assets/image/etc/walkThrough_p1.jpg">
+            <img id="wt_p2" src="assets/image/etc/walkThrough_p2.jpg">
+            <img id="wt_p3" src="assets/image/etc/walkThrough_p3.jpg">
+
+            <div id="right_icon"><i class="fas fa-chevron-right fa-3x"></i></div>
+            <div id="left_icon"><i class="fas fa-chevron-left fa-3x"></i></div>
+            <div id="close_icon"><i class="fas fa-times fa-3x"></i></div>
+
+            <div id="overlay"></div>
+        </div>
+        <div id="hint_icon"><i class="fas fa-book-open fa-2x"></i></div>
+    </body>
+    <script type="text/javascript" src= "js/script.js"></script>
 </body>
 </html>

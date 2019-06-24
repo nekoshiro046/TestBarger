@@ -56,9 +56,9 @@ function preload() {
 	etcImg[3] = loadImage('assets/image/etc/res_back.png');
 	etcImg[4] = loadImage('assets/image/etc/finish.png');
 	etcImg[5] = loadImage('assets/image/etc/startLogo.jpg');
-	etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
-	etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
-	etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
+	// etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
+	// etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
+	// etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
 	etcImg[9] = loadImage('assets/image/etc/logoText.jpg');
 	
 }
@@ -120,48 +120,49 @@ function drawStartScene(){
 		fill(200,64,89);
 		text('NOMNOM', windowWidth/2, windowHeight/4);
 		text('THE GAME', windowWidth/2, windowHeight/4*3);
-		pop();
-		
-	}else if(stP == 1){
-		imageMode(CORNERS);
-		image(etcImg[6], 0, 0,windowWidth,windowHeight);
-		push();
-		translate(windowWidth/2,windowHeight/6);
-		noStroke();
-		fill(200,64,89);
-		ellipse(-40,0,20,20);
-		fill(20,50,101);
-		ellipse(0,0,20,20);
-		fill(20,50,101);
-		ellipse(40,0,20,20);
-		pop();
-	}else if(stP == 2){
-		imageMode(CORNERS);
-		image(etcImg[7], 0, 0,windowWidth,windowHeight);
-		push();
-		translate(windowWidth/2,windowHeight/6);
-		noStroke();
-		fill(20,50,101);
-		ellipse(-40,0,20,20);
-		fill(200,64,89);
-		ellipse(0,0,20,20);
-		fill(20,50,101);
-		ellipse(40,0,20,20);
-		pop();
-	}else if(stP == 3){
-		imageMode(CORNERS);
-		image(etcImg[8], 0, 0,windowWidth,windowHeight);
-		push();
-		translate(windowWidth/2,windowHeight/6);
-		noStroke();
-		fill(20,50,101);
-		ellipse(-40,0,20,20);
-		fill(20,50,101);
-		ellipse(0,0,20,20);
-		fill(200,64,89);
-		ellipse(40,0,20,20);
-		pop();
-	}else if(stP == 4){
+		pop();	
+	}
+	// else if(stP == 1){
+	// 	imageMode(CORNERS);
+	// 	image(etcImg[6], 0, 0,windowWidth,windowHeight);
+	// 	push();
+	// 	translate(windowWidth/2,windowHeight/6);
+	// 	noStroke();
+	// 	fill(200,64,89);
+	// 	ellipse(-40,0,20,20);
+	// 	fill(20,50,101);
+	// 	ellipse(0,0,20,20);
+	// 	fill(20,50,101);
+	// 	ellipse(40,0,20,20);
+	// 	pop();
+	// }else if(stP == 2){
+	// 	imageMode(CORNERS);
+	// 	image(etcImg[7], 0, 0,windowWidth,windowHeight);
+	// 	push();
+	// 	translate(windowWidth/2,windowHeight/6);
+	// 	noStroke();
+	// 	fill(20,50,101);
+	// 	ellipse(-40,0,20,20);
+	// 	fill(200,64,89);
+	// 	ellipse(0,0,20,20);
+	// 	fill(20,50,101);
+	// 	ellipse(40,0,20,20);
+	// 	pop();
+	// }else if(stP == 3){
+	// 	imageMode(CORNERS);
+	// 	image(etcImg[8], 0, 0,windowWidth,windowHeight);
+	// 	push();
+	// 	translate(windowWidth/2,windowHeight/6);
+	// 	noStroke();
+	// 	fill(20,50,101);
+	// 	ellipse(-40,0,20,20);
+	// 	fill(20,50,101);
+	// 	ellipse(0,0,20,20);
+	// 	fill(200,64,89);
+	// 	ellipse(40,0,20,20);
+	// 	pop();
+	// }
+	else if(stP == 4){
 		imageMode(CENTER);
 		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
 
@@ -184,6 +185,7 @@ function drawStartScene(){
 		textSize(windowWidth/6);
 		fill(200,64,89);
 		text('START', 0, windowHeight/8*3);
+
 		// if((mouseX - windowWidth/2 > -windowWidth/4) 
 		// 	&& (mouseX - windowWidth/2 < windowWidth/4) 
 		// 	&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
@@ -201,68 +203,20 @@ function drawStartScene(){
 	}
 }
 
-// function mousePressed(){
-// 	if(scene == 0){
-// 		if(stP == 0){
-// 			stP++;
-// 		}else if(stP == 1){
-// 			if(mouseX >= windowWidth/2){
-// 				stP++;
-// 			}
-// 		}else if(stP == 2){
-// 			if(mouseX < windowWidth/2){
-// 				stP--;
-// 			}else{
-// 				stP++;
-// 			}
-// 		}else if(stP == 3){
-// 			if(mouseX < windowWidth/2){
-// 				stP--;
-// 			}else{
-// 				stP++;
-// 			}
-// 		}else if(stP == 4){
-// 			if((mouseX - windowWidth/2 > -windowWidth/4) 
-// 			&& (mouseX - windowWidth/2 < windowWidth/4) 
-// 			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
-// 			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
-// 				scene = 1;
-// 			}
-// 		}
-// 	}
-// }
 
 function touchEnded(){
 	if(scene == 0){
-		var count = 0;
-		if(stP == 0){
-			stP = 1;
-		}else if(stP == 1){
-			count++;
-			if(mouseX >= windowWidth/2 && count == 1){
-				stP = 2;
-			}
-		}else if(stP == 2){
-			count++;
-			if(mouseX < windowWidth/2 && count == 1){
-				stP = 1;
-			}else if(mouseX >= windowWidth/2 && count == 1){
-				stP = 3;
-			}
-		}else if(stP == 3){
-			count++;
-			if(mouseX < windowWidth/2){
-				stP = 2;
-			}else if(mouseX >= windowWidth/2 && count == 1){
-				stP = 4;
-			}
-		}else if(stP == 4){
+		if(stP == 4){
 			if((mouseX - windowWidth/2 > -windowWidth/4) 
 			&& (mouseX - windowWidth/2 < windowWidth/4) 
 			&& (mouseY - windowHeight/2 > windowHeight/3 - windowWidth/10)
 			&& ( mouseY - windowHeight/2 <=  windowHeight/3 + windowWidth/10)){
 				scene = 1;
 			}
+
+			$(function(){
+				$('#hint_icon').css('display','none');
+			});
 		}
 	}
 
