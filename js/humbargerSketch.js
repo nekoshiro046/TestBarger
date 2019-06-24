@@ -610,15 +610,16 @@ function culBurTitle(){
 		return s;
 	}
 
-	if((lettuceNum +tomatoNum) == 0 && pattyNum < 6){
-		s = '「野菜不足」';
-		return s;
-	}
-
 	if(pattyNum >= 6){
 		s = '「肉食家」';
 		return s;
 	}
+
+	if((lettuceNum + tomatoNum) < 1 && pattyNum > 3){
+		s = '「野菜不足」';
+		return s;
+	}
+
 	if(s == null){
 		s = '「称号なし」';
 		return s;
