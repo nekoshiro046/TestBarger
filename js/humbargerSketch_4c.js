@@ -25,21 +25,66 @@ function preload() {
 	Ph_Reg_font = loadFont('assets/font/Phenomena-Regular.otf');
 	Tsukushi_font = loadFont('assets/font/TsukushiAMaruGothic.otf');
 
-	objImg[0] = loadImage('assets/image/obj/sakanahone_t.jp2');
+	// objImg[0] = loadImage('assets/image/obj/sakanahone_t.jp2');
 
-	objImg[1] = loadImage('assets/image/obj/lettuce_top.jp2');
+	// objImg[1] = loadImage('assets/image/obj/lettuce_top.jp2');
+	// objImg[2] = loadImage('assets/image/obj/tomato_top.jp2');
+	// objImg[3] = loadImage('assets/image/obj/patty_top.jp2');
+	// objImg[4] = loadImage('assets/image/obj/cheese_top.jp2');
+	// objImg[5] = loadImage('assets/image/obj/bunsT_top.jp2');
+	// objImg[6] = loadImage('assets/image/obj/bunsU_top.jp2');
+
+	// objImg[7] = loadImage('assets/image/obj/lettuce_side.jp2');																	
+	// objImg[8] = loadImage('assets/image/obj/tomato_side.jp2');
+	// objImg[9] = loadImage('assets/image/obj/patty_side.jp2');
+	// objImg[10] = loadImage('assets/image/obj/cheese_side.jp2');
+	// objImg[11] = loadImage('assets/image/obj/bunsT_side.jp2');
+	// objImg[12] = loadImage('assets/image/obj/bunsU_side.jp2');
+
+
+	// waiterImg[0] = loadImage('assets/image/waiter/waiter_left_01.png');
+	// waiterImg[1] = loadImage('assets/image/waiter/waiter_left_02.png');
+	// waiterImg[2] = loadImage('assets/image/waiter/waiter_right_01.png');
+	// waiterImg[3] = loadImage('assets/image/waiter/waiter_right_02.png');
+	// waiterImg[4] = loadImage('assets/image/waiter/waiter_rolling_l.png');
+	// waiterImg[5] = loadImage('assets/image/waiter/waiter_rolling_r.png');
+
+
+	// etcImg[0] = loadImage('assets/image/etc/wow.png');
+	// etcImg[1] = loadImage('assets/image/etc/timeup.png');
+	// etcImg[2] = loadImage('assets/image/etc/back_02.jpg');
+	// etcImg[3] = loadImage('assets/image/etc/res_back.png');
+	// etcImg[4] = loadImage('assets/image/etc/finish.png');
+	// etcImg[5] = loadImage('assets/image/etc/startLogo.jpg');
+	// // etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
+	// // etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
+	// // etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
+	// etcImg[9] = loadImage('assets/image/etc/logoText.jpg');
+	
+}
+
+function setup() {
+	fr = 10;
+	scene = 0;
+	Ph_Bold_font = loadFont('assets/font/Phenomena-Bold.otf');
+	Ph_Reg_font = loadFont('assets/font/Phenomena-Regular.otf');
+	Tsukushi_font = loadFont('assets/font/TsukushiAMaruGothic.otf');
+
+	objImg[0] = loadImage('assets/image/obj/sakanahone_t.png');
+
+	objImg[1] = loadImage('assets/image/obj/lettuce_top.png');
 	objImg[2] = loadImage('assets/image/obj/tomato_top.jp2');
-	objImg[3] = loadImage('assets/image/obj/patty_top.jp2');
-	objImg[4] = loadImage('assets/image/obj/cheese_top.jp2');
-	objImg[5] = loadImage('assets/image/obj/bunsT_top.jp2');
-	objImg[6] = loadImage('assets/image/obj/bunsU_top.jp2');
+	objImg[3] = loadImage('assets/image/obj/patty_top.png');
+	objImg[4] = loadImage('assets/image/obj/cheese_top.png');
+	objImg[5] = loadImage('assets/image/obj/bunsT_top.png');
+	objImg[6] = loadImage('assets/image/obj/bunsU_top.png');
 
-	objImg[7] = loadImage('assets/image/obj/lettuce_side.jp2');																	
-	objImg[8] = loadImage('assets/image/obj/tomato_side.jp2');
-	objImg[9] = loadImage('assets/image/obj/patty_side.jp2');
-	objImg[10] = loadImage('assets/image/obj/cheese_side.jp2');
-	objImg[11] = loadImage('assets/image/obj/bunsT_side.jp2');
-	objImg[12] = loadImage('assets/image/obj/bunsU_side.jp2');
+	objImg[7] = loadImage('assets/image/obj/lettuce_side.png');																	
+	objImg[8] = loadImage('assets/image/obj/tomato_side.png');
+	objImg[9] = loadImage('assets/image/obj/patty_side.png');
+	objImg[10] = loadImage('assets/image/obj/cheese_side.png');
+	objImg[11] = loadImage('assets/image/obj/bunsT_side.png');
+	objImg[12] = loadImage('assets/image/obj/bunsU_side.png');
 
 
 	waiterImg[0] = loadImage('assets/image/waiter/waiter_left_01.png');
@@ -60,12 +105,6 @@ function preload() {
 	// etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
 	// etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
 	etcImg[9] = loadImage('assets/image/etc/logoText.jpg');
-	
-}
-
-function setup() {
-	fr = 10;
-	scene = 0;
   //slow down the frameRate to make it more visible
 
   canvas = createCanvas(windowWidth, windowHeight,P2D);
@@ -122,7 +161,7 @@ function drawStartScene(){
 		text('THE GAME', windowWidth/2, windowHeight/4*3);
 		pop();	
 	}
-	
+
 	else if(stP == 4){
 		imageMode(CENTER);
 		image(etcImg[5], windowWidth/2,windowHeight/2,windowWidth/2,windowWidth/2,);
