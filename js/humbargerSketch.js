@@ -104,7 +104,7 @@ function setup() {
 	// etcImg[6] = loadImage('assets/image/etc/walkThrough_p1.jpg');
 	// etcImg[7] = loadImage('assets/image/etc/walkThrough_p2.jpg');
 	// etcImg[8] = loadImage('assets/image/etc/walkThrough_p3.jpg');
-	etcImg[9] = loa
+	etcImg[9] = loadImage('assets/image/etc/logoText.jpg');
   //slow down the frameRate to make it more visible
 
   canvas = createCanvas(windowWidth, windowHeight,P2D);
